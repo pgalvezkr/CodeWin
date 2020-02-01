@@ -30,7 +30,7 @@ public class TarjetaService {
 				System.out.println("Generado: " + resultSet.getString(1));
 			}
 		}
-		// Handle any errors that may have occurred.
+		// Handle any errors that may have occurred.////////
 		catch (Exception e) {
 			e.printStackTrace();
 		}
