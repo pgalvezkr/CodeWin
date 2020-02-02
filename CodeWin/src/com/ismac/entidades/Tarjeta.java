@@ -1,33 +1,28 @@
 package com.ismac.entidades;
 
 public class Tarjeta {
-	private int IdTarjeta;
-	private int TipoDeTarjeta;
-	private int Estacion;
-	private int ValorDeTarjeta;
-	public int getIdTarjeta() {
-		return IdTarjeta;
-	}
-	public void setIdTarjeta(int idTarjeta) {
-		IdTarjeta = idTarjeta;
-	}
+	private int idTarjeta;
+	private int tipoDeTarjeta;
+	private int estacion;
+	private int valorDeTarjeta;
 	public int getTipoDeTarjeta() {
-		return TipoDeTarjeta;
+		return tipoDeTarjeta;
 	}
 	public void setTipoDeTarjeta(int tipoDeTarjeta) {
-		TipoDeTarjeta = tipoDeTarjeta;
+		this.tipoDeTarjeta = tipoDeTarjeta;
 	}
 	public int getEstacion() {
-		return Estacion;
+		return estacion;
 	}
 	public void setEstacion(int estacion) {
-		Estacion = estacion;
+		this.estacion = estacion;
 	}
 	public int getValorDeTarjeta() {
-		return ValorDeTarjeta;
+		return valorDeTarjeta;
 	}
 	public void setValorDeTarjeta(int valorDeTarjeta) {
-		ValorDeTarjeta = valorDeTarjeta;
+		this.valorDeTarjeta = valorDeTarjeta;
 	}
+	
 	
 }

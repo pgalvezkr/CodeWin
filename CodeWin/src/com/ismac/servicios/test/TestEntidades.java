@@ -7,6 +7,9 @@ public class TestEntidades {
 	public static void main(String[] args) {
 			Producto producto = new Producto();
 			producto.setNombre("Peras");
+			producto.setPrecio(10);
+			
+			
 
 	}
 

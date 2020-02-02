@@ -1,40 +1,34 @@
 package com.ismac.entidades;
 
 public class PuntoTarjetaProducto {
-	private int Id;
-	private int IdTarjeta;
-	private int IdProducto;
-	private int PuntosInicio;
-	private int PuntosFin;
-	public int getId() {
-		return Id;
-	}
-	public void setId(int id) {
-		Id = id;
-	}
+	private int id;
+	private int idTarjeta;
+	private int idProducto;
+	private int puntosInicio;
+	private int puntosFin;
 	public int getIdTarjeta() {
-		return IdTarjeta;
+		return idTarjeta;
 	}
 	public void setIdTarjeta(int idTarjeta) {
-		IdTarjeta = idTarjeta;
+		this.idTarjeta = idTarjeta;
 	}
 	public int getIdProducto() {
-		return IdProducto;
+		return idProducto;
 	}
 	public void setIdProducto(int idProducto) {
-		IdProducto = idProducto;
+		this.idProducto = idProducto;
 	}
 	public int getPuntosInicio() {
-		return PuntosInicio;
+		return puntosInicio;
 	}
 	public void setPuntosInicio(int puntosInicio) {
-		PuntosInicio = puntosInicio;
+		this.puntosInicio = puntosInicio;
 	}
 	public int getPuntosFin() {
-		return PuntosFin;
+		return puntosFin;
 	}
 	public void setPuntosFin(int puntosFin) {
-		PuntosFin = puntosFin;
+		this.puntosFin = puntosFin;
 	}
 	
 }

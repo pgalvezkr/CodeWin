@@ -1,32 +1,22 @@
 package com.ismac.entidades;
 
 public class Grupo {
-	private int IdGrupo;
-	private int PuntosObtenidos;
-	private int NumeroPremios;
-
-	public int getNumeroPremios() {
-		return NumeroPremios;
-	}
-
-	public void setNumeroPremios(int numeroPremios) {
-		NumeroPremios = numeroPremios;
-	}
-
-	public int getIdGrupo() {
-		return IdGrupo;
-	}
-
-	public void setIdGrupo(int idGrupo) {
-		IdGrupo = idGrupo;
-	}
-
+	private int idGrupo;
+	private int puntosObtenidos;
+	private int numeroPremios;
 	public int getPuntosObtenidos() {
-		return PuntosObtenidos;
+		return puntosObtenidos;
+	}
+	public void setPuntosObtenidos(int puntosObtenidos) {
+		this.puntosObtenidos = puntosObtenidos;
+	}
+	public int getNumeroPremios() {
+		return numeroPremios;
+	}
+	public void setNumeroPremios(int numeroPremios) {
+		this.numeroPremios = numeroPremios;
 	}
 
-	public void setPuntosObtenidos(int puntosObtenidos) {
-		PuntosObtenidos = puntosObtenidos;
-	}
+	
 
 }
