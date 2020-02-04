@@ -10,14 +10,11 @@ import java.awt.Canvas;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
+import java.awt.Color;
 
 public class Principal {
 
 	private JFrame frmPrincipal;
-	/**
-	 * @wbp.nonvisual location=218,99
-	 */
-	private final Canvas canvas = new Canvas();
 
 	/**
 	 * Launch the application.
@@ -48,22 +45,29 @@ public class Principal {
 	private void initialize() {
 		frmPrincipal = new JFrame();
 		frmPrincipal.getContentPane().setFont(new Font("Segoe Print", Font.BOLD, 11));
-		frmPrincipal.setTitle("Principal");
+		frmPrincipal.setTitle("Bienvenido  a Code Win");
 		frmPrincipal.setBounds(100, 100, 450, 300);
 		frmPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JButton btnLector = new JButton("Leer de Codigo");
+		btnLector.setForeground(Color.BLUE);
 		btnLector.setFont(new Font("Book Antiqua", Font.ITALIC, 13));
 		
 		JButton btnConfiguracion = new JButton("Configuracion");
+		btnConfiguracion.setForeground(Color.BLUE);
 		btnConfiguracion.setFont(new Font("Book Antiqua", Font.ITALIC, 13));
 		
 		JButton btnReporte = new JButton("Reportes");
+		btnReporte.setForeground(Color.BLUE);
 		btnReporte.setFont(new Font("Book Antiqua", Font.ITALIC, 13));
+		
+		JLabel lblNewLabel = new JLabel("Gracias por usar nuestro sistema");
+		lblNewLabel.setFont(new Font("Vivaldi", Font.BOLD, 18));
+		lblNewLabel.setForeground(Color.GRAY);
 		GroupLayout groupLayout = new GroupLayout(frmPrincipal.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 					.addGap(27)
 					.addComponent(btnLector)
 					.addGap(39)
@@ -71,11 +75,17 @@ public class Principal {
 					.addPreferredGap(ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
 					.addComponent(btnReporte, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
 					.addGap(19))
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+					.addContainerGap(103, Short.MAX_VALUE)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 235, GroupLayout.PREFERRED_SIZE)
+					.addGap(96))
 		);
 		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(175, Short.MAX_VALUE)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(42)
+					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnLector)
 						.addComponent(btnConfiguracion)
@@ -84,5 +94,4 @@ public class Principal {
 		);
 		frmPrincipal.getContentPane().setLayout(groupLayout);
 	}
-
 }
