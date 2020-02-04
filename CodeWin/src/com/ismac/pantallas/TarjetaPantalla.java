@@ -12,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
 import com.ismac.controller.TarjetaController;
 import com.ismac.entidades.Tarjeta;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -81,7 +83,7 @@ public class TarjetaPantalla {
 				ingreso.frame.setVisible(true);
 			}
 		});
-		JPanel panel = new JPanel();
+		JScrollPane panel = new JScrollPane();
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
