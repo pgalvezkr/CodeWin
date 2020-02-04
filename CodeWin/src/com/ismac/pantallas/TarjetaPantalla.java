@@ -12,6 +12,8 @@ import javax.swing.table.DefaultTableModel;
 import com.ismac.controller.TarjetaController;
 import com.ismac.entidades.Tarjeta;
 import javax.swing.JPanel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TarjetaPantalla {
 
@@ -73,6 +75,12 @@ public class TarjetaPantalla {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JButton btnNuevo = new JButton("Nuevo");
+		btnNuevo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				IngresoTarjetaPantalla ingreso = new IngresoTarjetaPantalla();
+				ingreso.frame.setVisible(true);
+			}
+		});
 		JPanel panel = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
