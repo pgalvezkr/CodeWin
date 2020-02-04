@@ -16,12 +16,15 @@ import javax.swing.JScrollPane;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class TarjetaPantalla {
 
 	private JFrame frame;
 	private JTable table;
 	private List<Tarjeta> tarjetas;
+	private JLabel lblMduloTarjetas;
 
 	/**
 	 * Launch the application.
@@ -83,17 +86,33 @@ public class TarjetaPantalla {
 				ingreso.frame.setVisible(true);
 			}
 		});
-		JScrollPane panel = new JScrollPane();
+		JPanel panel = new JPanel();
+		
+		lblMduloTarjetas = new JLabel("M\u00F3dulo Tarjetas");
 		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
-						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING).addComponent(btnNuevo)
-								.addComponent(panel, GroupLayout.PREFERRED_SIZE, 406, GroupLayout.PREFERRED_SIZE))
-						.addContainerGap(18, Short.MAX_VALUE)));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup().addGap(20).addComponent(btnNuevo).addGap(15)
-						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
-						.addContainerGap()));
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(179)
+							.addComponent(lblMduloTarjetas))
+						.addComponent(panel, GroupLayout.PREFERRED_SIZE, 406, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnNuevo))
+					.addContainerGap(18, Short.MAX_VALUE))
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(lblMduloTarjetas)
+					.addGap(4)
+					.addComponent(btnNuevo)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap())
+		);
 		panel.add(table);
 		frame.getContentPane().setLayout(groupLayout);
 	}
