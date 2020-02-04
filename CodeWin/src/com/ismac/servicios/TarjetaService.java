@@ -3,6 +3,7 @@ package com.ismac.servicios;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class TarjetaService {
 
 		ResultSet resultSet = null;
 		// SENTENCIA SQL
-		String sentenceSql = "INSERT INTO Tarjeta (TipoTarjeta, Estacion, ValorTarjeta) VALUES (" + tipoTarjeta + ", "
+		String sentenceSql = "INSERT INTO Tarjeta (TipoDeTarjeta, Estacion, ValorTarjeta) VALUES (" + tipoTarjeta + ", "
 				+ estacion + ", " + valorTarjeta + ")";
 		try {
 			// Creo la conexion
@@ -103,17 +104,15 @@ public class TarjetaService {
 			Connection conexion;
 			conexion = ConexionBdd.getConexion();
 			// Ejecuto la sentencia SQL
-			PreparedStatement sentenciaInsert = conexion.prepareStatement(sentenceSql,
-					java.sql.Statement.RETURN_GENERATED_KEYS);
-			sentenciaInsert.execute();
+			Statement sentenciaInsert = conexion.createStatement();
+			resultSet = sentenciaInsert.executeQuery(sentenceSql);
 			// Obtengo resultados
-			resultSet = sentenciaInsert.getGeneratedKeys();
 			while (resultSet.next()) {
 				Tarjeta tarjeta = new Tarjeta();
-				tarjeta.setIdTarjeta(resultSet.getInt(0));
-				tarjeta.setTipoDeTarjeta(resultSet.getInt(1));
-				tarjeta.setEstacion(resultSet.getInt(2));
-				tarjeta.setValorDeTarjeta(resultSet.getInt(3));
+				tarjeta.setIdTarjeta(resultSet.getInt("Idtarjeta"));
+				tarjeta.setTipoDeTarjeta(resultSet.getInt("TipoDeTarjeta"));
+				tarjeta.setEstacion(resultSet.getInt("Estacion"));
+				tarjeta.setValorDeTarjeta(resultSet.getInt("ValorTarjeta"));
 				tarjetas.add(tarjeta);
 			}
 		} catch (Exception e) {
