@@ -7,10 +7,20 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JProgressBar;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.Color;
+import javax.swing.JFormattedTextField;
+import javax.swing.JSeparator;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JCheckBoxMenuItem;
 
 public class PantallaConfiguracion {
 
-	private JFrame frame;
+	private JFrame frmConfiguracion;
 
 	/**
 	 * Launch the application.
@@ -20,7 +30,7 @@ public class PantallaConfiguracion {
 			public void run() {
 				try {
 					PantallaConfiguracion window = new PantallaConfiguracion();
-					window.frame.setVisible(true);
+					window.frmConfiguracion.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -39,18 +49,19 @@ public class PantallaConfiguracion {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 434, Short.MAX_VALUE)
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 261, Short.MAX_VALUE)
-		);
-		frame.getContentPane().setLayout(groupLayout);
+		frmConfiguracion = new JFrame();
+		frmConfiguracion.setTitle("Configuracion");
+		
+		JMenuBar menuBar = new JMenuBar();
+		frmConfiguracion.setJMenuBar(menuBar);
+		
+		JCheckBoxMenuItem chckbxmntmNewCheckItem = new JCheckBoxMenuItem("Tarjeta");
+		menuBar.add(chckbxmntmNewCheckItem);
+		
+		JCheckBoxMenuItem chckbxmntmNewCheckItem_1 = new JCheckBoxMenuItem("Producto ");
+		menuBar.add(chckbxmntmNewCheckItem_1);
+		
+		JCheckBoxMenuItem chckbxmntmNewCheckItem_2 = new JCheckBoxMenuItem("Premios");
+		menuBar.add(chckbxmntmNewCheckItem_2);
 	}
 }
