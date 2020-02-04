@@ -2,13 +2,16 @@ package com.ismac.entidades;
 
 public class Catalogo {
 	private int idcatalogo;
-	private int nombre;
+	private String nombre;
 	private int tipo;
-	public int getNombre() {
-		return nombre;
+	
+	
+	
+	public int getIdcatalogo() {
+		return idcatalogo;
 	}
-	public void setNombre(int nombre) {
-		this.nombre = nombre;
+	public void setIdcatalogo(int idcatalogo) {
+		this.idcatalogo = idcatalogo;
 	}
 	public int getTipo() {
 		return tipo;
@@ -16,4 +19,11 @@ public class Catalogo {
 	public void setTipo(int tipo) {
 		this.tipo = tipo;
 	}
-}
+	public String getNombre() {
+		return nombre;
+	}
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	}
