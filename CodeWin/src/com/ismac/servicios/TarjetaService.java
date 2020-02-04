@@ -110,8 +110,8 @@ public class TarjetaService {
 			while (resultSet.next()) {
 				Tarjeta tarjeta = new Tarjeta();
 				tarjeta.setIdTarjeta(resultSet.getInt("Idtarjeta"));
-				tarjeta.setTipoDeTarjeta(resultSet.getInt("TipoDeTarjeta"));
-				tarjeta.setEstacion(resultSet.getInt("Estacion"));
+				tarjeta.setTipoDeTarjeta(resultSet.getString("TipoDeTarjeta"));
+				tarjeta.setEstacion(resultSet.getString("Estacion"));
 				tarjeta.setValorDeTarjeta(resultSet.getInt("ValorTarjeta"));
 				tarjetas.add(tarjeta);
 			}

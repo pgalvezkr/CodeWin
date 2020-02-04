@@ -8,11 +8,13 @@ public class TestEntidades {
 	public static void main(String[] args) {
 			Producto producto = new Producto();
 			ManejoSql conexion = new ManejoSql();
+			//Crear un producto
 			producto.setNombre("Mangos");
 			producto.setPrecio(20);
 			String insertSql = "INSERT INTO Producto (Nombre, Precio) VALUES "
 			        + "('"+producto.getNombre()+"',"+ producto.getPrecio()+");";
 			conexion.insertSql(insertSql);
+			//Ver Productos
 			
 
 	}
