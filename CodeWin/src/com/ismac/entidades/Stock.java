@@ -1,32 +1,27 @@
 package com.ismac.entidades;
 
 public class Stock {
-	private int IdStock;
-	private int IdProducto;
-	private int CantidadInicial;
-	private int CantidadActual;
-	public int getIdStock() {
-		return IdStock;
-	}
-	public void setIdStock(int idStock) {
-		IdStock = idStock;
-	}
+	private int idStock;
+	private int idProducto;
+	private int cantidadInicial;
+	private int cantidadActual;
 	public int getIdProducto() {
-		return IdProducto;
+		return idProducto;
 	}
 	public void setIdProducto(int idProducto) {
-		IdProducto = idProducto;
+		this.idProducto = idProducto;
 	}
 	public int getCantidadInicial() {
-		return CantidadInicial;
+		return cantidadInicial;
 	}
 	public void setCantidadInicial(int cantidadInicial) {
-		CantidadInicial = cantidadInicial;
+		this.cantidadInicial = cantidadInicial;
 	}
 	public int getCantidadActual() {
-		return CantidadActual;
+		return cantidadActual;
 	}
 	public void setCantidadActual(int cantidadActual) {
-		CantidadActual = cantidadActual;
+		this.cantidadActual = cantidadActual;
 	}
+	
 }
