@@ -51,15 +51,15 @@ public class Principal {
 		
 		JButton btnLector = new JButton("Leer de Codigo");
 		btnLector.setForeground(Color.BLUE);
-		btnLector.setFont(new Font("Book Antiqua", Font.ITALIC, 13));
+		btnLector.setFont(new Font("Book Antiqua", Font.BOLD, 13));
 		
 		JButton btnConfiguracion = new JButton("Configuracion");
 		btnConfiguracion.setForeground(Color.BLUE);
-		btnConfiguracion.setFont(new Font("Book Antiqua", Font.ITALIC, 13));
+		btnConfiguracion.setFont(new Font("Book Antiqua", Font.BOLD, 13));
 		
 		JButton btnReporte = new JButton("Reportes");
 		btnReporte.setForeground(Color.BLUE);
-		btnReporte.setFont(new Font("Book Antiqua", Font.ITALIC, 13));
+		btnReporte.setFont(new Font("Book Antiqua", Font.BOLD, 13));
 		
 		JLabel lblNewLabel = new JLabel("Gracias por usar nuestro sistema");
 		lblNewLabel.setFont(new Font("Vivaldi", Font.BOLD, 18));
@@ -67,14 +67,14 @@ public class Principal {
 		GroupLayout groupLayout = new GroupLayout(frmPrincipal.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+				.addGroup(groupLayout.createSequentialGroup()
 					.addGap(27)
 					.addComponent(btnLector)
-					.addGap(39)
+					.addGap(18)
 					.addComponent(btnConfiguracion)
-					.addPreferredGap(ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+					.addGap(18)
 					.addComponent(btnReporte, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-					.addGap(19))
+					.addContainerGap(36, Short.MAX_VALUE))
 				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 					.addContainerGap(103, Short.MAX_VALUE)
 					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 235, GroupLayout.PREFERRED_SIZE)
