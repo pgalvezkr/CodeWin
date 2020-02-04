@@ -10,9 +10,9 @@ public class ManejoSql {
 
 	//private String connectionUrl;
 	private String connectionUrl =
-            "jdbc:sqlserver://192.168.122.161:1433;"
-            + "database=Pruebas;"
-            + "user=factIsmac;"
+            "jdbc:sqlserver://192.168.1.10:1433;"
+            + "database=CodeWin;"
+            + "user=sa;"
             + "password=Ismacsql.1;"
             //+ "encrypt=true;"
             + "trustServerCertificate=false;"
@@ -21,7 +21,7 @@ public class ManejoSql {
 	/////////////////////////Insertar Fila//////////////////////////////////////////
 	public ResultSet insertSql(String insertSql) {
 		ResultSet resultSet = null;
-		//String insertSql = "INSERT INTO Productos (Nombre, Precio) VALUES "
+		//String insertSql = "INSERT INTO Producto (Nombre, Precio) VALUES "
           //      + "('Manzanas', 5);";
 		try (Connection connection = DriverManager.getConnection(connectionUrl);
                 PreparedStatement prepsInsertProduct = connection.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);) {
