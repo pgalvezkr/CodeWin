@@ -3,7 +3,6 @@ package com.ismac.servicios;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class TarjetaService {
 
 		ResultSet resultSet = null;
 		// SENTENCIA SQL
-		String sentenceSql = "INSERT INTO Tarjeta (TipoDeTarjeta, Estacion, ValorTarjeta) VALUES (" + tipoTarjeta + ", "
+		String sentenceSql = "INSERT INTO Tarjeta (TipoTarjeta, Estacion, ValorTarjeta) VALUES (" + tipoTarjeta + ", "
 				+ estacion + ", " + valorTarjeta + ")";
 		try {
 			// Creo la conexion
@@ -64,6 +63,11 @@ public class TarjetaService {
 			System.out.println("Ocurrió un error al momento de actualizar la tarjeta");
 			throw new Exception(e.getMessage());
 		}
+
+		// Handle any errors that may have occurred./
+		catch (Exception e) {
+			e.printStackTrace();
+
 		return resultSet;
 	}
 
@@ -88,6 +92,7 @@ public class TarjetaService {
 		} catch (Exception e) {
 			System.out.println("Ocurrió un error al momento de eliminar la tarjeta");
 			throw new Exception(e.getMessage());
+
 		}
 
 		return resultSet;
@@ -104,15 +109,17 @@ public class TarjetaService {
 			Connection conexion;
 			conexion = ConexionBdd.getConexion();
 			// Ejecuto la sentencia SQL
-			Statement sentenciaInsert = conexion.createStatement();
-			resultSet = sentenciaInsert.executeQuery(sentenceSql);
+			PreparedStatement sentenciaInsert = conexion.prepareStatement(sentenceSql,
+					java.sql.Statement.RETURN_GENERATED_KEYS);
+			sentenciaInsert.execute();
 			// Obtengo resultados
+			resultSet = sentenciaInsert.getGeneratedKeys();
 			while (resultSet.next()) {
 				Tarjeta tarjeta = new Tarjeta();
-				tarjeta.setIdTarjeta(resultSet.getInt("Idtarjeta"));
-				tarjeta.setTipoDeTarjeta(resultSet.getInt("TipoDeTarjeta"));
-				tarjeta.setEstacion(resultSet.getInt("Estacion"));
-				tarjeta.setValorDeTarjeta(resultSet.getInt("ValorTarjeta"));
+				tarjeta.setIdTarjeta(resultSet.getInt(0));
+				tarjeta.setTipoDeTarjeta(resultSet.getInt(1));
+				tarjeta.setEstacion(resultSet.getInt(2));
+				tarjeta.setValorDeTarjeta(resultSet.getInt(3));
 				tarjetas.add(tarjeta);
 			}
 		} catch (Exception e) {

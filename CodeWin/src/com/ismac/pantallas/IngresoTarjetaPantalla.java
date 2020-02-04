@@ -19,7 +19,7 @@ import java.awt.event.ActionEvent;
 
 public class IngresoTarjetaPantalla {
 
-	private JFrame frame;
+	public JFrame frame;
 	private JTextField txtPuntos;
 
 	/**
