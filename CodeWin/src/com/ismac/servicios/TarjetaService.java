@@ -13,7 +13,7 @@ import com.ismac.util.ConexionBdd;
 public class TarjetaService {
 
 	// CREAR TARJETA
-	public static ResultSet crear(int tipoTarjeta, int estacion, int valorTarjeta) throws Exception {
+	public static ResultSet crear(String tipoTarjeta, String estacion, int valorTarjeta) throws Exception {
 
 		ResultSet resultSet = null;
 		// SENTENCIA SQL

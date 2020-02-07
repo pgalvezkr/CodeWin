@@ -4,29 +4,47 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ismac.entidades.Producto;
-import com.ismac.entidades.Tarjeta;
 import com.ismac.servicios.ProductoService;
-import com.ismac.servicios.TarjetaService;
 
 public class ProductoController {
 
-	public static List<Tarjeta> getProducto() {
-		List<Tarjeta> productos = new ArrayList<>();
+	public static void crearProducto(Producto producto) {
 		try {
-			Object tarjetas = ProductoService.listar();
+			ProductoService.crear(producto.getNombre(), producto.getPrecio());
 		} catch (Exception e) {
-			System.out.println("Ocurrió un error al consultar las tarjetas " + e.getMessage());
+			System.out.println("Ocurrió un error al guardar las producto " + e.getMessage());
+			e.printStackTrace();
+		}
+	}
+
+	public static List<Producto> getProducto() {
+		List<Producto> productos = new ArrayList<>();
+		try {
+			productos = ProductoService.listar();
+		} catch (Exception e) {
+			System.out.println("Ocurrió un error al consultar las productos " + e.getMessage());
 			e.printStackTrace();
 		}
 		return productos;
 	}
 
-	public static void crearTarjeta(Tarjeta tarjeta) {
+	public static void actualizarProducto(int id, Producto producto) {
 		try {
-			TarjetaService.crear(tarjeta.getTipoDeTarjeta(), tarjeta.getEstacion(), tarjeta.getValorDeTarjeta());
+			ProductoService.actualizar(id, producto.getNombre(), producto.getPrecio());
 		} catch (Exception e) {
-			System.out.println("Ocurrió un error al guardar las tarjeta " + e.getMessage());
+			System.out.println("Ocurrió un error al actualizar el producto " + e.getMessage());
+			e.printStackTrace();
+		}
+
+	}
+
+	public static void eliminarProducto(int id) {
+		try {
+			ProductoService.eliminar(id);
+		} catch (Exception e) {
+			System.out.println("Ocurrió un error al eliminar el producto " + e.getMessage());
 			e.printStackTrace();
 		}
 	}
+
 }
