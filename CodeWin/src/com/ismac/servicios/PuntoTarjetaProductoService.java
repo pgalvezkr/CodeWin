@@ -13,12 +13,13 @@ import com.ismac.util.ConexionBdd;
 public class PuntoTarjetaProductoService {
 
 	// CREAR TARJETA
-		public static ResultSet crear(int tipoTarjeta, int estacion, int valorTarjeta) throws Exception {
+		public static ResultSet crear(int Id, int IdTargeta, int IdProducto, int PuntosInicio, int PuntosFin) throws Exception {
 
 			ResultSet resultSet = null;
+			String tipoTarjeta;
 			// SENTENCIA SQL
-			String sentenceSql = "INSERT INTO Tarjeta (TipoDeTarjeta, Estacion, ValorTarjeta) VALUES (" + tipoTarjeta + ", "
-					+ estacion + ", " + valorTarjeta + ")";
+			String sentenceSql = "INSERT INTO PuntoTarjetaProducto (Id, IdTargeta, IdProducto, PuntosInicio, PuntosFin) VALUES (" + Id + ", "
+					+ IdTargeta + ", " + IdProducto + ", " + PuntosInicio + ", " + PuntosFin + ")";
 			try {
 				// Creo la conexion
 				Connection conexion;
