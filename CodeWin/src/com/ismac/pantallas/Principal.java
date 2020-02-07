@@ -53,6 +53,11 @@ public class Principal {
 		frmPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JButton btnLectorCodigo = new JButton("Leer de Codigo");
+		btnLectorCodigo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
 		btnLectorCodigo.setForeground(Color.BLUE);
 		btnLectorCodigo.setFont(new Font("Book Antiqua", Font.BOLD, 13));
 		
