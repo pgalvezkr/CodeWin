@@ -1,21 +1,20 @@
 package com.ismac.servicios.test;
 
+import java.io.IOException;
+
+import com.ismac.controller.LectorController;
 import com.ismac.entidades.ManejoSql;
 import com.ismac.entidades.Producto;
 
 public class TestEntidades {
 
 	public static void main(String[] args) {
-			Producto producto = new Producto();
-			ManejoSql conexion = new ManejoSql();
-			//Crear un producto
-			producto.setNombre("Mangos");
-			producto.setPrecio(20);
-			String insertSql = "INSERT INTO Producto (Nombre, Precio) VALUES "
-			        + "('"+producto.getNombre()+"',"+ producto.getPrecio()+");";
-			conexion.insertSql(insertSql);
-			//Ver Productos
-			
+		try {
+			LectorController.obtenerPuntosFromCodigo();
+		} catch (IOException e) {
+			System.out.println("Ocurrio un error");
+			e.printStackTrace();
+		}
 
 	}
 
