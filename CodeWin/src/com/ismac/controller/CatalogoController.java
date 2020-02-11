@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.ismac.entidades.Catalogo;
+import com.ismac.entidades.Producto;
 import com.ismac.servicios.CatalogoService;
+import com.ismac.servicios.ProductoService;
 
 public class CatalogoController {
 
@@ -18,4 +20,15 @@ public class CatalogoController {
 		}
 		return catalogos;
 	}
-}
+	
+
+	public static void obtenerNombre(Catalogo Catalogo) {
+		try {
+			CatalogoService.obtenerNombre(Catalogo.getNombre());
+		} catch (Exception e) {
+			System.out.println("Ocurrió un error al odtener nombre " + e.getMessage());
+			e.printStackTrace();
+		}
+	
+}	
+}	
