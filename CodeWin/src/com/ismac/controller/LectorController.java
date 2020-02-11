@@ -46,11 +46,11 @@ public class LectorController {
 		}
 	}
 
-	public static int obtenerPuntosFromCodigo() throws IOException {
+	public static String obtenerPuntosFromCodigo() throws IOException {
 		tomarFoto();
 		File imagenQr = new File("test.png");
 		String valor = decodeQRCode(imagenQr);
-		return valor != null ? Integer.parseInt(valor) : 0;
+		return valor;// != null ? Integer.parseInt(valor) : 0;
 
 	}
 }
