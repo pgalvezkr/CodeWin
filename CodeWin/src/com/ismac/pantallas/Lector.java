@@ -1,4 +1,5 @@
 //Pantalla generada por David
+//Editada por JK
 package com.ismac.pantallas;
 
 import java.awt.EventQueue;
@@ -13,6 +14,7 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.GridLayout;
 import com.jgoodies.forms.layout.FormLayout;
+import com.ismac.controller.LectorController;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
@@ -30,6 +32,8 @@ import javax.swing.Action;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.SwingConstants;
@@ -39,7 +43,7 @@ import javax.swing.JEditorPane;
 public class Lector {
 
 	private JFrame frmLector;
-	private JTextField textField;
+	private JTextField textFieldPuntos;
 	private JTextField txtGanas;
 	private JLabel lblTotalDePuntos;
 	private JTextField textField_1;
@@ -76,9 +80,9 @@ public class Lector {
 		frmLector.setTitle("Lector");
 		frmLector.setBounds(100, 100, 567, 339);
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setColumns(10);
+		textFieldPuntos = new JTextField();
+		textFieldPuntos.setEditable(false);
+		textFieldPuntos.setColumns(10);
 		
 		txtGanas = new JTextField();
 		txtGanas.setEditable(false);
@@ -98,11 +102,19 @@ public class Lector {
 		lblTotalDePuntos = new JLabel("TOTAL DE PUNTOS OBTENIDOS");
 		lblTotalDePuntos.setFont(new Font("Franklin Gothic Book", Font.BOLD, 15));
 		
-		JButton btnNewButton = new JButton("Premio");
-		btnNewButton.setForeground(Color.BLUE);
-		btnNewButton.setFont(new Font("Book Antiqua", Font.BOLD, 13));
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnLeerTarjeta = new JButton("Leer Tarjeta");
+		btnLeerTarjeta.setForeground(Color.BLUE);
+		btnLeerTarjeta.setFont(new Font("Book Antiqua", Font.BOLD, 13));
+		btnLeerTarjeta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				LectorController lector = new LectorController();
+				try {
+					textFieldPuntos.setText(lector.obtenerPuntosFromCodigo());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+				
 			}
 		});
 		
@@ -113,11 +125,8 @@ public class Lector {
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(27)
+					.addContainerGap(27, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnNewButton)
-							.addContainerGap())
 						.addGroup(groupLayout.createSequentialGroup()
 							.addComponent(editorPane, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE)
 							.addGap(108)
@@ -126,20 +135,24 @@ public class Lector {
 									.addComponent(txtGanas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 									.addGap(118))
 								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-										.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+										.addGroup(groupLayout.createSequentialGroup()
 											.addPreferredGap(ComponentPlacement.RELATED)
 											.addComponent(textField_1))
 										.addGroup(groupLayout.createSequentialGroup()
 											.addGap(23)
 											.addComponent(lblTotalPuntos, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
 											.addGap(37)
-											.addComponent(textField, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)))
-									.addGap(83))))))
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(171, Short.MAX_VALUE)
-					.addComponent(lblTotalDePuntos, GroupLayout.PREFERRED_SIZE, 306, GroupLayout.PREFERRED_SIZE)
-					.addGap(123))
+											.addComponent(textFieldPuntos, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)))
+									.addGap(83)))
+							.addGap(83))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addComponent(lblTotalDePuntos, GroupLayout.PREFERRED_SIZE, 306, GroupLayout.PREFERRED_SIZE)
+							.addGap(123))))
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addGap(32)
+					.addComponent(btnLeerTarjeta)
+					.addContainerGap(593, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -151,15 +164,15 @@ public class Lector {
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblTotalPuntos)
-								.addComponent(textField, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+								.addComponent(textFieldPuntos, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(txtGanas, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
 							.addGap(11)
 							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))
 						.addComponent(editorPane, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(btnNewButton)
-					.addContainerGap(20, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnLeerTarjeta)
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		frmLector.getContentPane().setLayout(groupLayout);
 	}
