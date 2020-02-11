@@ -103,17 +103,23 @@ public class Lector {
 		lblTotalDePuntos.setFont(new Font("Franklin Gothic Book", Font.BOLD, 15));
 		
 		JButton btnLeerTarjeta = new JButton("Leer Tarjeta");
+		btnLeerTarjeta.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				LectorController lector = new LectorController();
+				try {
+					textFieldPuntos.setText(lector.obtenerPuntosFromCodigo());
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 		btnLeerTarjeta.setForeground(Color.BLUE);
 		btnLeerTarjeta.setFont(new Font("Book Antiqua", Font.BOLD, 13));
 		btnLeerTarjeta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				LectorController lector = new LectorController();
-				try {
-					textFieldPuntos.setText(lector.obtenerPuntosFromCodigo());
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				} 
+				
 				
 			}
 		});
