@@ -2,6 +2,7 @@
 package com.ismac.pantallas;
 
 import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 import java.awt.Canvas;
 import java.awt.BorderLayout;
@@ -37,10 +38,10 @@ import javax.swing.JEditorPane;
 
 public class Lector {
 
-	private JFrame frame;
-	private JButton btnNewButton;
+	private JFrame frmLector;
 	private JTextField textField;
 	private JTextField txtGanas;
+	private JLabel lblTotalDePuntos;
 	private JTextField textField_1;
 
 	/**
@@ -51,7 +52,7 @@ public class Lector {
 			public void run() {
 				try {
 					Lector window = new Lector();
-					window.frame.setVisible(true);
+					window.frmLector.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -70,61 +71,98 @@ public class Lector {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		btnNewButton = new JButton("Total Puntos:");
-		btnNewButton.setBackground(UIManager.getColor("Button.light"));
-		btnNewButton.setFont(new Font("Book Antiqua", Font.BOLD, 13));
-		btnNewButton.setForeground(Color.BLUE);
+		frmLector = new JFrame();
+		frmLector.setResizable(false);
+		frmLector.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmLector.setTitle("Lector");
+		frmLector.setBounds(100, 100, 567, 339);
 		
 		textField = new JTextField();
 		textField.setEditable(false);
 		textField.setColumns(10);
 		
 		txtGanas = new JTextField();
+		txtGanas.setEditable(false);
 		txtGanas.setBackground(new Color(255, 245, 238));
 		txtGanas.setForeground(Color.BLACK);
 		txtGanas.setFont(new Font("Book Antiqua", Font.BOLD, 17));
 		txtGanas.setHorizontalAlignment(SwingConstants.CENTER);
-		txtGanas.setText("GANAS:");
+		txtGanas.setText("GANASTE:");
 		txtGanas.setColumns(10);
 		
+		JEditorPane editorPane = new JEditorPane();
+		editorPane.setEditable(false);
+		
+		JLabel lblTotalPuntos = new JLabel("Total Puntos");
+		lblTotalPuntos.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		
+		lblTotalDePuntos = new JLabel("TOTAL DE PUNTOS OBTENIDOS");
+		lblTotalDePuntos.setFont(new Font("Franklin Gothic Book", Font.BOLD, 15));
+		
+		JButton btnNewButton = new JButton("Premio");
+		btnNewButton.setForeground(Color.BLUE);
+		btnNewButton.setFont(new Font("Book Antiqua", Font.BOLD, 13));
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		
 		textField_1 = new JTextField();
+		textField_1.setEditable(false);
 		textField_1.setColumns(10);
-		GroupLayout groupLayout = new GroupLayout(frame.getContentPane());
+		GroupLayout groupLayout = new GroupLayout(frmLector.getContentPane());
 		groupLayout.setHorizontalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(189, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+					.addGap(27)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(txtGanas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(60))
+							.addComponent(btnNewButton)
+							.addContainerGap())
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(textField_1, Alignment.LEADING)
+							.addComponent(editorPane, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE)
+							.addGap(108)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(btnNewButton)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(textField, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)))
-							.addGap(42))))
+									.addComponent(txtGanas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addGap(118))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+										.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(textField_1))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addGap(23)
+											.addComponent(lblTotalPuntos, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
+											.addGap(37)
+											.addComponent(textField, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)))
+									.addGap(83))))))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(171, Short.MAX_VALUE)
+					.addComponent(lblTotalDePuntos, GroupLayout.PREFERRED_SIZE, 306, GroupLayout.PREFERRED_SIZE)
+					.addGap(123))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(60)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnNewButton)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap()
+					.addComponent(lblTotalDePuntos, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+					.addGap(27)
+					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblTotalPuntos)
+								.addComponent(textField, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(txtGanas, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
+							.addGap(11)
+							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))
+						.addComponent(editorPane, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(txtGanas, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-					.addGap(18)
-					.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(35, Short.MAX_VALUE))
+					.addComponent(btnNewButton)
+					.addContainerGap(20, Short.MAX_VALUE))
 		);
-		frame.getContentPane().setLayout(groupLayout);
+		frmLector.getContentPane().setLayout(groupLayout);
 	}
 	private class SwingAction extends AbstractAction {
 		public SwingAction() {

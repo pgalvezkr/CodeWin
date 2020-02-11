@@ -49,7 +49,7 @@ public class RegistroPremio {
 	private void initialize() {
 		frmRegistroDePremio = new JFrame();
 		frmRegistroDePremio.setResizable(false);
-		frmRegistroDePremio.setBounds(100, 100, 494, 318);
+		frmRegistroDePremio.setBounds(100, 100, 449, 279);
 		frmRegistroDePremio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JLabel lblProducto = new JLabel("Producto");
@@ -75,42 +75,43 @@ public class RegistroPremio {
 		lblTitulo.setFont(new Font("Franklin Gothic Book", Font.BOLD, 15));
 		GroupLayout groupLayout = new GroupLayout(frmRegistroDePremio.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-					.addGap(96)
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(87)
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblCantidad)
+						.addComponent(btnGuardar)
+						.addComponent(lblProducto))
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(btnGuardar)
-							.addPreferredGap(ComponentPlacement.RELATED, 132, Short.MAX_VALUE)
-							.addComponent(btnCancelar))
+							.addPreferredGap(ComponentPlacement.RELATED, 70, Short.MAX_VALUE)
+							.addComponent(btnCancelar)
+							.addGap(78))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblProducto)
-								.addComponent(lblCantidad))
-							.addPreferredGap(ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(txtCantidad)
-								.addComponent(txtNombreProducto, GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))))
-					.addGap(92))
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-					.addGap(165)
+							.addGap(51)
+							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(txtNombreProducto, Alignment.LEADING)
+								.addComponent(txtCantidad, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE))
+							.addGap(93))))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(135)
 					.addComponent(lblTitulo)
-					.addContainerGap(164, Short.MAX_VALUE))
+					.addContainerGap(139, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(19)
+					.addContainerGap()
 					.addComponent(lblTitulo)
-					.addGap(49)
+					.addGap(42)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 						.addComponent(lblProducto)
 						.addComponent(txtNombreProducto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(33)
+					.addGap(27)
 					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblCantidad)
-						.addComponent(txtCantidad, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+						.addComponent(txtCantidad, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblCantidad))
+					.addPreferredGap(ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnGuardar)
 						.addComponent(btnCancelar))
