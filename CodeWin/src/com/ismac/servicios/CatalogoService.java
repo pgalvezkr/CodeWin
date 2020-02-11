@@ -38,7 +38,7 @@ public class CatalogoService {
 		}
 
 		return catalogos;
-	}
+	} 
 
 	// GET TARJETA
 	public static List<Catalogo> obtenerPorIdentificador(int id) throws Exception {
@@ -68,5 +68,63 @@ public class CatalogoService {
 
 		return catalogos;
 	}
+	// GET TARJETA
+	public static List<Catalogo> obtenerNombre(String nombre) throws Exception {
+		List<Catalogo> catalogos = new ArrayList<Catalogo>();
+		ResultSet resultSet = null;
+		// SENTENCIA SQL
+		String sentenceSql = "select * from Catalogo where idCatalogo= " + nombre;
+		try {
+			// Creo la conexion
+			Connection conexion;
+			conexion = ConexionBdd.getConexion();
+			// Ejecuto la sentencia SQL
+			Statement sentenciaInsert = conexion.createStatement();
+			resultSet = sentenciaInsert.executeQuery(sentenceSql);
+			// Obtengo resultados
+			while (resultSet.next()) {
+				Catalogo catalogo = new Catalogo();
+				catalogo.setIdcatalogo(resultSet.getInt("IdCatalogo"));
+				catalogo.setNombre(resultSet.getString("Nombre"));
+				catalogo.setTipo(resultSet.getInt("tipo"));
+				catalogos.add(catalogo);
+			}
+		} catch (Exception e) {
+			System.out.println("Ocurrió un error al momento de obtener la tarjeta");
+			throw new Exception(e.getMessage());
+		}
+
+		return catalogos;
 
 }
+	// GET TARJETA
+		public static List<Catalogo> obtenerTipo(String tipo) throws Exception {
+			List<Catalogo> catalogos = new ArrayList<Catalogo>();
+			ResultSet resultSet = null;
+			// SENTENCIA SQL
+			String sentenceSql = "select * from Catalogo where idCatalogo= " + tipo;
+			try {
+				// Creo la conexion
+				Connection conexion;
+				conexion = ConexionBdd.getConexion();
+				// Ejecuto la sentencia SQL
+				Statement sentenciaInsert = conexion.createStatement();
+				resultSet = sentenciaInsert.executeQuery(sentenceSql);
+				// Obtengo resultados
+				while (resultSet.next()) {
+					Catalogo catalogo = new Catalogo();
+					catalogo.setIdcatalogo(resultSet.getInt("IdCatalogo"));
+					catalogo.setNombre(resultSet.getString("Nombre"));
+					catalogo.setTipo(resultSet.getInt("tipo"));
+					catalogos.add(catalogo);
+				}
+			} catch (Exception e) {
+				System.out.println("Ocurrió un error al momento de obtener la tarjeta");
+				throw new Exception(e.getMessage());
+			}
+
+			return catalogos;
+
+	}
+}
+
