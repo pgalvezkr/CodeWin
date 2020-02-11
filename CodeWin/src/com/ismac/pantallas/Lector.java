@@ -41,7 +41,9 @@ import javax.swing.UIManager;
 import javax.swing.JEditorPane;
 
 public class Lector {
-
+	LectorController lector = new LectorController();
+	private int numeroTarjetas;
+	private int totalPuntos=0;
 	private JFrame frmLector;
 	private JTextField textFieldPuntos;
 	private JTextField txtGanas;
@@ -106,12 +108,15 @@ public class Lector {
 		btnLeerTarjeta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				LectorController lector = new LectorController();
+				numeroTarjetas++;
+				if (numeroTarjetas<=3) {
 				try {
-					textFieldPuntos.setText(lector.obtenerPuntosFromCodigo());
+					totalPuntos = lector.obtenerPuntosFromCodigo() + totalPuntos;
+					textFieldPuntos.setText(Integer.toString(totalPuntos));
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
+				}
 				}
 			}
 		});

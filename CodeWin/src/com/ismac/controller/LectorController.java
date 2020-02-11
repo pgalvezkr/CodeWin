@@ -30,6 +30,7 @@ public class LectorController {
 
 		// save image to PNG file cambiar a un path generico como Desktop
 		ImageIO.write(image, "PNG", new File("test.png"));
+		webcam.close();
 	}
 
 	private static String decodeQRCode(File qrCodeimage) throws IOException {
@@ -46,11 +47,11 @@ public class LectorController {
 		}
 	}
 
-	public static String obtenerPuntosFromCodigo() throws IOException {
+	public static int obtenerPuntosFromCodigo() throws IOException {
 		tomarFoto();
 		File imagenQr = new File("test.png");
 		String valor = decodeQRCode(imagenQr);
-		return valor;// != null ? Integer.parseInt(valor) : 0;
+		return valor != null ? Integer.parseInt(valor) : 0;
 
 	}
 }
