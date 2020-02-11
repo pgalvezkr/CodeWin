@@ -43,7 +43,6 @@ public class Lector {
 	private JTextField txtGanas;
 	private JLabel lblTotalDePuntos;
 	private JTextField textField_1;
-
 	/**
 	 * Launch the application.
 	 */
