@@ -15,6 +15,7 @@ import com.google.zxing.NotFoundException;
 import com.google.zxing.Result;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
 import com.google.zxing.common.HybridBinarizer;
+import com.ismac.servicios.PremioService;
 
 public class LectorController {
 
@@ -53,5 +54,16 @@ public class LectorController {
 		String valor = decodeQRCode(imagenQr);
 		return valor != null ? Integer.parseInt(valor) : 0;
 
+	}
+
+	public static String obtenerPremio(int numeroPuntos) {
+		String nombreProducto = "";
+		try {
+			nombreProducto = PremioService.obtenerPremio(numeroPuntos);
+		} catch (Exception e) {
+			System.out.println("Ocurrió un error al momento de consultar el premio");
+			e.printStackTrace();
+		}
+		return nombreProducto;
 	}
 }

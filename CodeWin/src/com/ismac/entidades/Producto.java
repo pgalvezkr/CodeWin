@@ -1,6 +1,7 @@
 package com.ismac.entidades;
 
 public class Producto {
+	
 	private int idProducto;
 	private String nombre;
 	private double precio;

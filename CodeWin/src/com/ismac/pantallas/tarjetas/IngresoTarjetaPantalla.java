@@ -1,4 +1,4 @@
-package com.ismac.pantallas;
+package com.ismac.pantallas.tarjetas;
 
 import java.awt.EventQueue;
 
@@ -8,9 +8,16 @@ import javax.swing.GroupLayout.Alignment;
 
 import com.ismac.controller.TarjetaController;
 import com.ismac.entidades.Tarjeta;
+import com.ismac.pantallas.premios.IngresoPremio;
+import com.ismac.pantallas.premios.ListaPremio;
+import com.ismac.pantallas.productos.IngresoProducto;
+import com.ismac.pantallas.productos.ListaProducto;
 import com.ismac.servicios.TarjetaService;
 
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -45,7 +52,7 @@ public class IngresoTarjetaPantalla {
 		initialize();
 	}
 
-	private void crearTarjeta(int tipoTarjeta, int estacion, int puntos) {
+	private void crearTarjeta(String tipoTarjeta, String estacion, int puntos) {
 		Tarjeta tarjeta = new Tarjeta();
 		tarjeta.setTipoDeTarjeta(tipoTarjeta);
 		tarjeta.setEstacion(estacion);
@@ -81,7 +88,8 @@ public class IngresoTarjetaPantalla {
 		btnGuardar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// LLAMAR AL METODO QUE CREA LA TARJETA
-				crearTarjeta(cmbTipo.getSelectedIndex(), cmbEstacion.getSelectedIndex(),
+				crearTarjeta((String) cmbTipo.getItemAt(cmbTipo.getSelectedIndex()),
+						(String) cmbEstacion.getItemAt(cmbEstacion.getSelectedIndex()),
 						Integer.parseInt(txtPuntos.getText()));
 				frame.setVisible(false);
 				frame.dispose();
@@ -134,5 +142,97 @@ public class IngresoTarjetaPantalla {
 						.addComponent(btnCancelar))
 				.addContainerGap(52, Short.MAX_VALUE)));
 		frame.getContentPane().setLayout(groupLayout);
+		cargarMenu();
+	}
+
+	private void cargarMenu() {
+
+		JMenuBar mbConfiguracion = new JMenuBar();
+		frame.setJMenuBar(mbConfiguracion);
+
+		JMenu mTarjeta = new JMenu("Tarjeta");
+		mbConfiguracion.add(mTarjeta);
+
+		JMenuItem miNuevaTarjeta = new JMenuItem("Nuevo");
+		miNuevaTarjeta.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				IngresoTarjetaPantalla ingreso = new IngresoTarjetaPantalla();
+				ingreso.frame.setVisible(true);
+				frame.setVisible(false);
+				frame.dispose();
+			}
+		});
+
+		mTarjeta.add(miNuevaTarjeta);
+
+		JMenuItem miListarTarjeta = new JMenuItem("Listar");
+		miListarTarjeta.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TarjetaPantalla listar = new TarjetaPantalla();
+				listar.frmListaTarjeta.setVisible(true);
+				frame.setVisible(false);
+				frame.dispose();
+			}
+		});
+		mTarjeta.add(miListarTarjeta);
+
+		JMenu mnProducto = new JMenu("Producto");
+		mbConfiguracion.add(mnProducto);
+
+		JMenuItem miNuevoProducto = new JMenuItem("Nuevo");
+		miNuevoProducto.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				IngresoProducto nuevo = new IngresoProducto();
+				nuevo.frame.setVisible(true);
+				frame.setVisible(false);
+				frame.dispose();
+			}
+		});
+		mnProducto.add(miNuevoProducto);
+
+		JMenuItem miListarProducto = new JMenuItem("Listar");
+		miListarProducto.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ListaProducto lista = new ListaProducto();
+				lista.frame.setVisible(true);
+				frame.setVisible(false);
+				frame.dispose();
+			}
+		});
+		mnProducto.add(miListarProducto);
+
+		JMenu mnPremios = new JMenu("Premios");
+		mbConfiguracion.add(mnPremios);
+
+		JMenuItem miNuevoPremio = new JMenuItem("Nuevo");
+		miNuevoPremio.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				IngresoPremio nuevo = new IngresoPremio();
+				nuevo.frame.setVisible(true);
+				frame.setVisible(false);
+				frame.dispose();
+			}
+		});
+		mnPremios.add(miNuevoPremio);
+
+		JMenuItem miListarPremios = new JMenuItem("Listar");
+		miListarPremios.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				ListaPremio lista = new ListaPremio();
+				lista.frame.setVisible(true);
+				frame.setVisible(false);
+				frame.dispose();
+			}
+		});
+		mnPremios.add(miListarPremios);
 	}
 }

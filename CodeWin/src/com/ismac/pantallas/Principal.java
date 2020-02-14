@@ -16,8 +16,11 @@ import java.awt.event.ActionEvent;
 
 public class Principal {
 
-	private JFrame frmPrincipal;
+	public JFrame frmPrincipal;
+	
+	private Lector lectorPantalla;
 
+	private Configuracion configuracion;
 	/**
 	 * Launch the application.
 	 */
@@ -48,14 +51,16 @@ public class Principal {
 		frmPrincipal = new JFrame();
 		frmPrincipal.getContentPane().setForeground(Color.WHITE);
 		frmPrincipal.getContentPane().setFont(new Font("Segoe Print", Font.BOLD, 11));
-		frmPrincipal.setTitle("Bienvenido  a Code Win");
+		frmPrincipal.setTitle("Code Win");
 		frmPrincipal.setBounds(100, 100, 450, 300);
 		frmPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JButton btnLectorCodigo = new JButton("Leer de Codigo");
 		btnLectorCodigo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				frmPrincipal.setVisible(false);
+				lectorPantalla = new Lector();
+				lectorPantalla.frmLector.setVisible(true);
 			}
 		});
 		btnLectorCodigo.setForeground(Color.BLUE);
@@ -64,44 +69,39 @@ public class Principal {
 		JButton btnConfiguracion = new JButton("Configuracion");
 		btnConfiguracion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				configuracion = new Configuracion();
+				configuracion.frmConfiguracion.setVisible(true);
 			}
 		});
 		btnConfiguracion.setForeground(Color.BLUE);
 		btnConfiguracion.setFont(new Font("Book Antiqua", Font.BOLD, 13));
-		
-		JButton btnReporte = new JButton("Reportes");
-		btnReporte.setForeground(Color.BLUE);
-		btnReporte.setFont(new Font("Book Antiqua", Font.BOLD, 13));
 		
 		JLabel lblTextoEntrada = new JLabel("Gracias por usar nuestro sistema");
 		lblTextoEntrada.setFont(new Font("Vivaldi", Font.BOLD, 18));
 		lblTextoEntrada.setForeground(Color.GRAY);
 		GroupLayout groupLayout = new GroupLayout(frmPrincipal.getContentPane());
 		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(27)
+			groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
+					.addGap(60)
 					.addComponent(btnLectorCodigo)
-					.addGap(18)
+					.addPreferredGap(ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
 					.addComponent(btnConfiguracion)
-					.addGap(18)
-					.addComponent(btnReporte, GroupLayout.PREFERRED_SIZE, 95, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(36, Short.MAX_VALUE))
-				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
-					.addContainerGap(103, Short.MAX_VALUE)
+					.addGap(62))
+				.addGroup(groupLayout.createSequentialGroup()
+					.addContainerGap(107, Short.MAX_VALUE)
 					.addComponent(lblTextoEntrada, GroupLayout.PREFERRED_SIZE, 235, GroupLayout.PREFERRED_SIZE)
-					.addGap(96))
+					.addGap(92))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.TRAILING)
 				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(42)
+					.addGap(36)
 					.addComponent(lblTextoEntrada, GroupLayout.PREFERRED_SIZE, 77, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnConfiguracion)
-						.addComponent(btnReporte)
-						.addComponent(btnLectorCodigo))
+						.addComponent(btnLectorCodigo)
+						.addComponent(btnConfiguracion))
 					.addGap(63))
 		);
 		frmPrincipal.getContentPane().setLayout(groupLayout);

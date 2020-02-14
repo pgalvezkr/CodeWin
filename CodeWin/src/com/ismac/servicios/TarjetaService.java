@@ -71,7 +71,7 @@ public class TarjetaService {
 	public static ResultSet eliminar(int idTarjeta) throws Exception {
 		ResultSet resultSet = null;
 		// SENTENCIA SQL
-		String sentenceSql = "DELTE FROM Tarjeta WHERE IdTarjeta = " + idTarjeta;
+		String sentenceSql = "DELETE FROM Tarjeta WHERE IdTarjeta = " + idTarjeta;
 		try {
 			// Creo la conexion
 			Connection conexion;

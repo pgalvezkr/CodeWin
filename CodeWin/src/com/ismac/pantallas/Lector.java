@@ -39,16 +39,19 @@ import javax.swing.JMenuItem;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.JEditorPane;
+import javax.swing.DropMode;
 
 public class Lector {
-	LectorController lector = new LectorController();
+	Principal principal;
 	private int numeroTarjetas;
-	private int totalPuntos=0;
-	private JFrame frmLector;
-	private JTextField textFieldPuntos;
-	private JTextField txtGanas;
+	private int totalPuntos = 0;
+	public JFrame frmLector;
+	private JTextField txtPuntos;
 	private JLabel lblTotalDePuntos;
-	private JTextField textField_1;
+	private JTextField txtPuntosObtenidos;
+	private JTextField txtPremio;
+	private JButton btnPremio;
+
 	/**
 	 * Launch the application.
 	 */
@@ -79,44 +82,33 @@ public class Lector {
 		frmLector = new JFrame();
 		frmLector.setResizable(false);
 		frmLector.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmLector.setTitle("Lector");
+		frmLector.setTitle("Code Win");
 		frmLector.setBounds(100, 100, 567, 339);
-		
-		textFieldPuntos = new JTextField();
-		textFieldPuntos.setEditable(false);
-		textFieldPuntos.setColumns(10);
-		
-		txtGanas = new JTextField();
-		txtGanas.setEditable(false);
-		txtGanas.setBackground(new Color(255, 245, 238));
-		txtGanas.setForeground(Color.BLACK);
-		txtGanas.setFont(new Font("Book Antiqua", Font.BOLD, 17));
-		txtGanas.setHorizontalAlignment(SwingConstants.CENTER);
-		txtGanas.setText("GANASTE:");
-		txtGanas.setColumns(10);
-		
-		JEditorPane editorPane = new JEditorPane();
-		editorPane.setEditable(false);
-		
-		JLabel lblTotalPuntos = new JLabel("Total Puntos");
-		lblTotalPuntos.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		
+
+		txtPuntos = new JTextField();
+		txtPuntos.setEditable(false);
+		txtPuntos.setBackground(new Color(255, 245, 238));
+		txtPuntos.setForeground(Color.BLACK);
+		txtPuntos.setFont(new Font("Book Antiqua", Font.BOLD, 17));
+		txtPuntos.setHorizontalAlignment(SwingConstants.CENTER);
+		txtPuntos.setText("PUNTOS:");
+		txtPuntos.setColumns(10);
+
 		lblTotalDePuntos = new JLabel("TOTAL DE PUNTOS OBTENIDOS");
 		lblTotalDePuntos.setFont(new Font("Franklin Gothic Book", Font.BOLD, 15));
-		
+
 		JButton btnLeerTarjeta = new JButton("Leer Tarjeta");
 		btnLeerTarjeta.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				numeroTarjetas++;
-				if (numeroTarjetas<=3) {
-				try {
-					totalPuntos = lector.obtenerPuntosFromCodigo() + totalPuntos;
-					textFieldPuntos.setText(Integer.toString(totalPuntos));
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+				if (numeroTarjetas <= 3) {
+					try {
+						totalPuntos = LectorController.obtenerPuntosFromCodigo() + totalPuntos;
+						lblTotalDePuntos.setText(Integer.toString(totalPuntos));
+					} catch (IOException e1) {
+						e1.printStackTrace();
+					}
 				}
 			}
 		});
@@ -124,75 +116,92 @@ public class Lector {
 		btnLeerTarjeta.setFont(new Font("Book Antiqua", Font.BOLD, 13));
 		btnLeerTarjeta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				
-				
+
 			}
 		});
-		
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		textField_1.setColumns(10);
+
+		txtPuntosObtenidos = new JTextField();
+		txtPuntosObtenidos.setForeground(Color.RED);
+		txtPuntosObtenidos.setHorizontalAlignment(SwingConstants.CENTER);
+		txtPuntosObtenidos.setFont(new Font("Segoe UI Black", Font.BOLD, 36));
+		txtPuntosObtenidos.setText("0");
+		txtPuntosObtenidos.setEditable(false);
+		txtPuntosObtenidos.setColumns(10);
+
+		txtPremio = new JTextField();
+		txtPremio.setForeground(Color.BLACK);
+		txtPremio.setFont(new Font("Segoe UI Black", Font.BOLD, 14));
+		txtPremio.setHorizontalAlignment(SwingConstants.CENTER);
+		txtPremio.setText("APLAUSOS");
+		txtPremio.setEditable(false);
+		txtPremio.setColumns(10);
+
+		JButton btnReinciar = new JButton("Reiniciar");
+		btnReinciar.setForeground(Color.BLUE);
+		btnReinciar.setFont(new Font("Book Antiqua", Font.BOLD, 13));
+
+		JButton btnRegresar = new JButton("Regresar");
+		btnRegresar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				principal = new Principal();
+				principal.frmPrincipal.setVisible(true);
+				frmLector.setVisible(false);
+			}
+		});
+		btnRegresar.setForeground(Color.BLUE);
+		btnRegresar.setFont(new Font("Book Antiqua", Font.BOLD, 13));
+
+		btnPremio = new JButton("Ver Premio");
+		btnPremio.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				// 1. AQUI ACTUALIZAR EL LABEL CON EL NOMBRE DEL PREMIO
+
+				// 2. INVOCO AL FRAME DEL STOCK PARA DISMINUIRLO
+				StockFinal stock = new StockFinal();
+				stock.frmStock.setVisible(true);
+			}
+		});
+		btnPremio.setBackground(new Color(255, 245, 238));
+		btnPremio.setFont(new Font("Book Antiqua", Font.BOLD, 17));
+
 		GroupLayout groupLayout = new GroupLayout(frmLector.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap(27, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(editorPane, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE)
-							.addGap(108)
-							.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-								.addGroup(groupLayout.createSequentialGroup()
-									.addComponent(txtGanas, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addGap(118))
-								.addGroup(groupLayout.createSequentialGroup()
-									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
-										.addGroup(groupLayout.createSequentialGroup()
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(textField_1))
-										.addGroup(groupLayout.createSequentialGroup()
-											.addGap(23)
-											.addComponent(lblTotalPuntos, GroupLayout.PREFERRED_SIZE, 75, GroupLayout.PREFERRED_SIZE)
-											.addGap(37)
-											.addComponent(textFieldPuntos, GroupLayout.PREFERRED_SIZE, 109, GroupLayout.PREFERRED_SIZE)))
-									.addGap(83)))
-							.addGap(83))
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblTotalDePuntos, GroupLayout.PREFERRED_SIZE, 306, GroupLayout.PREFERRED_SIZE)
-							.addGap(123))))
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-					.addGap(32)
-					.addComponent(btnLeerTarjeta)
-					.addContainerGap(593, Short.MAX_VALUE))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(lblTotalDePuntos, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
-					.addGap(27)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblTotalPuntos)
-								.addComponent(textFieldPuntos, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(txtGanas, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE)
-							.addGap(11)
-							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, 101, GroupLayout.PREFERRED_SIZE))
-						.addComponent(editorPane, GroupLayout.PREFERRED_SIZE, 183, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnLeerTarjeta)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-		);
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+				.addGroup(groupLayout.createSequentialGroup().addGap(29).addComponent(btnLeerTarjeta).addGap(85)
+						.addComponent(btnReinciar, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+						.addComponent(btnRegresar, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE)
+						.addGap(29))
+				.addGroup(groupLayout.createSequentialGroup().addGap(48)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(txtPuntosObtenidos, 0, 0, Short.MAX_VALUE).addComponent(txtPuntos,
+										GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+										GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(btnPremio, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+										Short.MAX_VALUE)
+								.addComponent(txtPremio, GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
+						.addGap(71))
+				.addGroup(groupLayout.createSequentialGroup().addContainerGap(172, Short.MAX_VALUE)
+						.addComponent(lblTotalDePuntos, GroupLayout.PREFERRED_SIZE, 306, GroupLayout.PREFERRED_SIZE)
+						.addGap(83)));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
+				.createSequentialGroup().addContainerGap()
+				.addComponent(lblTotalDePuntos, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE).addGap(11)
+				.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnPremio, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(txtPuntos, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))
+				.addGap(26)
+				.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addComponent(txtPuntosObtenidos, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
+						.addComponent(txtPremio, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE))
+				.addPreferredGap(ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnRegresar, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(btnLeerTarjeta)
+								.addComponent(btnReinciar, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)))
+				.addContainerGap()));
 		frmLector.getContentPane().setLayout(groupLayout);
 	}
-	private class SwingAction extends AbstractAction {
-		public SwingAction() {
-			putValue(NAME, "SwingAction");
-			putValue(SHORT_DESCRIPTION, "Some short description");
-		}
-		public void actionPerformed(ActionEvent e) {
-		}
-	}
+
 }
