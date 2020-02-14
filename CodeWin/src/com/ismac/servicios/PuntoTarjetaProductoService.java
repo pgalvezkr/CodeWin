@@ -12,7 +12,7 @@ import com.ismac.util.ConexionBdd;
 
 public class PuntoTarjetaProductoService {
 
-	// CREAR TARJETA
+	// CREAR TARJETA .
 		public static ResultSet crear(int Id, int IdTargeta, int IdProducto, int PuntosInicio, int PuntosFin) throws Exception {
 
 			ResultSet resultSet = null;
