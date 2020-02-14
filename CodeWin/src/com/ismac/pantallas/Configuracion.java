@@ -122,7 +122,7 @@ public class Configuracion {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				IngresoPremio nuevo = new IngresoPremio();
-				nuevo.frame.setVisible(true);
+				nuevo.frmCodeWin.setVisible(true);
 				frmConfiguracion.setVisible(false);
 				frmConfiguracion.dispose();
 			}

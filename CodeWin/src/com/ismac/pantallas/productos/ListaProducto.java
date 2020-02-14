@@ -122,7 +122,7 @@ public class ListaProducto {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				IngresoPremio nuevo = new IngresoPremio();
-				nuevo.frame.setVisible(true);
+				nuevo.frmCodeWin.setVisible(true);
 				frame.setVisible(false);
 				frame.dispose();
 			}
