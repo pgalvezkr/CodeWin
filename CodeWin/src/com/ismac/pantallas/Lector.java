@@ -36,6 +36,7 @@ import java.io.IOException;
 
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.JEditorPane;
@@ -51,6 +52,44 @@ public class Lector {
 	private JTextField txtPuntosObtenidos;
 	private JTextField txtPremio;
 	private JButton btnPremio;
+	
+	
+	
+	public int getNumeroTarjetas() {
+		return numeroTarjetas;
+	}
+
+	public void setNumeroTarjetas(int numeroTarjetas) {
+		this.numeroTarjetas = numeroTarjetas;
+	}
+
+	public int getTotalPuntos() {
+		return totalPuntos;
+	}
+
+	public void setTotalPuntos(int totalPuntos) {
+		this.totalPuntos = totalPuntos;
+	}
+
+	public JTextField getTxtPuntos() {
+		return txtPuntos;
+	}
+
+	public void setTxtPuntos(JTextField txtPuntos) {
+		this.txtPuntos = txtPuntos;
+	}
+
+	public JTextField getTxtPuntosObtenidos() {
+		return txtPuntosObtenidos;
+	}
+
+	public void setTxtPuntosObtenidos(JTextField txtPuntosObtenidos) {
+		this.txtPuntosObtenidos = txtPuntosObtenidos;
+	}
+	
+	public void setTxtPuntosObtenidosjk() {
+		txtPuntosObtenidos.setText("0");
+	}
 
 	/**
 	 * Launch the application.
@@ -102,13 +141,23 @@ public class Lector {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				numeroTarjetas++;
+				System.out.println(numeroTarjetas);
 				if (numeroTarjetas <= 3) {
 					try {
-						totalPuntos = LectorController.obtenerPuntosFromCodigo() + totalPuntos;
-						lblTotalDePuntos.setText(Integer.toString(totalPuntos));
+						int puntos = LectorController.obtenerPuntosFromCodigo();
+						if(puntos==0) {
+							JOptionPane.showMessageDialog(null, "No se pudo leer el codigo por favor intente Nuevamente", "Adventencia", JOptionPane.INFORMATION_MESSAGE);
+							numeroTarjetas--;
+							return;
+						}
+						totalPuntos = puntos + totalPuntos;
+						
+						txtPuntosObtenidos.setText(Integer.toString(totalPuntos));
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
+				}else {
+					JOptionPane.showMessageDialog(null, "Usted Ingreso las 3 tarjetas", "Adventencia", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
@@ -137,6 +186,19 @@ public class Lector {
 		txtPremio.setColumns(10);
 
 		JButton btnReinciar = new JButton("Reiniciar");
+		btnReinciar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				LectorController reset = new LectorController();
+				reset.resetTarjetas();
+//				JOptionPane.showMessageDialog(null, "Ingrese Nuevamente las Tarjetas"
+//						+ "", "Adventencia", JOptionPane.INFORMATION_MESSAGE);
+//				txtPuntosObtenidos.setText("0");
+//				totalPuntos=0;
+//				numeroTarjetas=0;
+			}
+			
+		});
 		btnReinciar.setForeground(Color.BLUE);
 		btnReinciar.setFont(new Font("Book Antiqua", Font.BOLD, 13));
 
