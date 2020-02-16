@@ -11,6 +11,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.ismac.controller.ProductoController;
 import com.ismac.controller.StockController;
+import com.ismac.servicios.ProductoService;
 import com.ismac.servicios.StockService;
 
 import javax.swing.JButton;
@@ -20,6 +21,8 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 
 public class StockFinal {
 
@@ -31,10 +34,18 @@ public class StockFinal {
 	private JButton btnGrabar;
 	private JButton btnCancelar;
 	private String nombreProducto;
-	public int idprod;
+	private String cantidadActual;
+	private int idprd;
 	
 	
-	
+	public String getCantidadActual() {
+		return cantidadActual;
+	}
+
+	public void setCantidadActual(String cantidadActual) {
+		this.cantidadActual = cantidadActual;
+	}
+
 	public String getNombreProducto() {
 		return nombreProducto;
 	}
@@ -77,16 +88,42 @@ public class StockFinal {
 	 */
 	private void initialize() {
 		frmStock = new JFrame();
+		frmStock.addComponentListener(new ComponentAdapter() {
+			@Override
+			public void componentShown(ComponentEvent e) {
+				txtProducto.setText(nombreProducto);
+				txtProducto.enable(true);
+				ProductoService idprod = new ProductoService();
+				
+				try {
+					idprd = idprod.getIdProductoByNombre(nombreProducto);
+				} catch (Exception e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}
+				StockService stoc = new StockService();
+				try {
+					int cantidadFinal = stoc.obtenerCantidadActual(idprd);
+					txtCantidadActual.setText(Integer.toString(cantidadFinal));
+					txtCantidadActual.enable(true);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
+			}
+		});
 		frmStock.getContentPane().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				txtProducto.setText(nombreProducto);
+				//txtProducto.setText(nombreProducto);//si vale pero mejor es shown
 			}
 		});
 		frmStock.getContentPane().addFocusListener(new FocusAdapter() {
 			@Override
 			public void focusGained(FocusEvent e) {
-				txtProducto.setText(nombreProducto);
+				//txtProducto.setText(nombreProducto);//no funciona	no entra aqui
 			}
 		});
 		
