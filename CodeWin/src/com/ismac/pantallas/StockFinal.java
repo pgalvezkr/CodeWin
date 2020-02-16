@@ -8,7 +8,13 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
+
+import com.ismac.controller.ProductoController;
+import com.ismac.controller.StockController;
+
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class StockFinal {
 
@@ -17,8 +23,9 @@ public class StockFinal {
 	private JTextField txtCantidadActual;
 	private JTextField txtCantidadEntregada;
 	private JLabel lblCantidadEntregada;
-	private JButton btnNewButton;
-	private JButton btnNewButton_1;
+	private JButton btnGrabar;
+	private JButton btnCancelar;
+	public String nombreProducto;
 
 	/**
 	 * Launch the application.
@@ -51,78 +58,80 @@ public class StockFinal {
 		frmStock.setTitle("Stock");
 		frmStock.setBounds(100, 100, 450, 300);
 		frmStock.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+
 		JLabel lblProducto = new JLabel("Producto");
-		
+
 		txtProducto = new JTextField();
 		txtProducto.setEnabled(false);
 		txtProducto.setEditable(false);
 		txtProducto.setColumns(10);
-		
+
 		JLabel lblCantidadActual = new JLabel("Cantidad Actual");
-		
+
 		txtCantidadActual = new JTextField();
 		txtCantidadActual.setEditable(false);
 		txtCantidadActual.setEnabled(false);
 		txtCantidadActual.setColumns(10);
-		
+
 		txtCantidadEntregada = new JTextField();
 		txtCantidadEntregada.setColumns(10);
-		
+
 		lblCantidadEntregada = new JLabel("Cantidad Entregada");
+		//Aquí consultar la cantidad actual del producto y poner ese valor en el texto de cantidad actual
 		
-		btnNewButton = new JButton("Grabar");
-		
-		btnNewButton_1 = new JButton("Cancelar");
+		// Aquí poner el nombre del producto en el texto del producto
+
+		// Aquí consultar el id del producto por el nombre invocando al metodo
+		int idProducto = ProductoController.getIdProductoByNombre(nombreProducto);
+		int cantidad = Integer.getInteger(txtCantidadEntregada.getText());
+		btnGrabar = new JButton("Grabar");
+		btnGrabar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				StockController.descontarProductos(idProducto, cantidad);
+			}
+		});
+
+		btnCancelar = new JButton("Cancelar");
 		GroupLayout groupLayout = new GroupLayout(frmStock.getContentPane());
-		groupLayout.setHorizontalGroup(
-			groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(40)
-					.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addComponent(lblProducto)
-							.addPreferredGap(ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
-							.addComponent(txtProducto, GroupLayout.PREFERRED_SIZE, 234, GroupLayout.PREFERRED_SIZE))
-						.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblCantidadActual, GroupLayout.PREFERRED_SIZE, 88, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblCantidadEntregada, GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-								.addComponent(txtCantidadActual, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 234, GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtCantidadEntregada, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 234, GroupLayout.PREFERRED_SIZE))))
-					.addGap(50))
-				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup()
-					.addGap(117)
-					.addComponent(btnNewButton)
-					.addGap(48)
-					.addComponent(btnNewButton_1)
-					.addContainerGap(129, Short.MAX_VALUE))
-		);
-		groupLayout.setVerticalGroup(
-			groupLayout.createParallelGroup(Alignment.LEADING)
-				.addGroup(groupLayout.createSequentialGroup()
-					.addGap(36)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblProducto)
-						.addComponent(txtProducto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(txtCantidadActual, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(groupLayout
+				.createSequentialGroup().addGap(40)
+				.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+						.addGroup(groupLayout.createSequentialGroup().addComponent(lblProducto)
+								.addPreferredGap(ComponentPlacement.RELATED, 67, Short.MAX_VALUE)
+								.addComponent(txtProducto, GroupLayout.PREFERRED_SIZE, 234, GroupLayout.PREFERRED_SIZE))
+						.addGroup(Alignment.LEADING,
+								groupLayout.createSequentialGroup()
+										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addComponent(lblCantidadActual, GroupLayout.PREFERRED_SIZE, 88,
+														GroupLayout.PREFERRED_SIZE)
+												.addComponent(lblCantidadEntregada, GroupLayout.DEFAULT_SIZE, 100,
+														Short.MAX_VALUE))
+										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addComponent(txtCantidadActual, Alignment.TRAILING,
+														GroupLayout.PREFERRED_SIZE, 234, GroupLayout.PREFERRED_SIZE)
+												.addComponent(txtCantidadEntregada, Alignment.TRAILING,
+														GroupLayout.PREFERRED_SIZE, 234, GroupLayout.PREFERRED_SIZE))))
+				.addGap(50))
+				.addGroup(Alignment.LEADING, groupLayout.createSequentialGroup().addGap(117).addComponent(btnGrabar)
+						.addGap(48).addComponent(btnCancelar).addContainerGap(129, Short.MAX_VALUE)));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
+				.createSequentialGroup().addGap(36)
+				.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(lblProducto).addComponent(
+						txtProducto, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+				.addGap(18)
+				.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(txtCantidadActual, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblCantidadActual))
-					.addGap(18)
-					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(txtCantidadEntregada, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(3)
-							.addComponent(lblCantidadEntregada)))
-					.addPreferredGap(ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnNewButton)
-						.addComponent(btnNewButton_1))
-					.addGap(45))
-		);
+				.addGap(18)
+				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addComponent(txtCantidadEntregada, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
+								GroupLayout.PREFERRED_SIZE)
+						.addGroup(groupLayout.createSequentialGroup().addGap(3).addComponent(lblCantidadEntregada)))
+				.addPreferredGap(ComponentPlacement.RELATED, 61, Short.MAX_VALUE).addGroup(groupLayout
+						.createParallelGroup(Alignment.BASELINE).addComponent(btnGrabar).addComponent(btnCancelar))
+				.addGap(45)));
 		frmStock.getContentPane().setLayout(groupLayout);
 	}
 

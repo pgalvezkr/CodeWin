@@ -52,8 +52,7 @@ public class Lector {
 	private JTextField txtPuntosObtenidos;
 	private JTextField txtPremio;
 	private JButton btnPremio;
-	
-
+	private JButton btnStock;
 
 	/**
 	 * Launch the application.
@@ -109,19 +108,22 @@ public class Lector {
 				if (numeroTarjetas <= 3) {
 					try {
 						int puntos = LectorController.obtenerPuntosFromCodigo();
-						if(puntos==0) {
-							JOptionPane.showMessageDialog(null, "No se pudo leer el codigo por favor intente Nuevamente", "Adventencia", JOptionPane.INFORMATION_MESSAGE);
+						if (puntos == 0) {
+							JOptionPane.showMessageDialog(null,
+									"No se pudo leer el codigo por favor intente Nuevamente", "Adventencia",
+									JOptionPane.INFORMATION_MESSAGE);
 							numeroTarjetas--;
 							return;
 						}
 						totalPuntos = puntos + totalPuntos;
-						
+
 						txtPuntosObtenidos.setText(Integer.toString(totalPuntos));
 					} catch (IOException e1) {
 						e1.printStackTrace();
 					}
-				}else {
-					JOptionPane.showMessageDialog(null, "Usted Ingreso las 3 tarjetas", "Adventencia", JOptionPane.INFORMATION_MESSAGE);
+				} else {
+					JOptionPane.showMessageDialog(null, "Usted Ingreso las 3 tarjetas", "Adventencia",
+							JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});
@@ -153,13 +155,13 @@ public class Lector {
 		btnReinciar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				JOptionPane.showMessageDialog(null, "Ingrese Nuevamente las Tarjetas"
-						+ "", "Adventencia", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Ingrese Nuevamente las Tarjetas" + "", "Adventencia",
+						JOptionPane.INFORMATION_MESSAGE);
 				txtPuntosObtenidos.setText("0");
-				totalPuntos=0;
-				numeroTarjetas=0;
+				totalPuntos = 0;
+				numeroTarjetas = 0;
 			}
-			
+
 		});
 		btnReinciar.setForeground(Color.BLUE);
 		btnReinciar.setFont(new Font("Book Antiqua", Font.BOLD, 13));
@@ -179,29 +181,36 @@ public class Lector {
 		btnPremio.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				
+
 			}
-			
+
 		});
 		btnPremio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				LectorController premio = new LectorController();
-				
 				// 1. AQUI ACTUALIZAR EL LABEL CON EL NOMBRE DEL PREMIO
 				txtPremio.setText(premio.obtenerPremio(Integer.parseInt(txtPuntosObtenidos.getText())));
-				// 2. INVOCO AL FRAME DEL STOCK PARA DISMINUIRLO
-				StockFinal stock = new StockFinal();
-				stock.frmStock.setVisible(true);
 			}
 		});
 		btnPremio.setBackground(new Color(255, 245, 238));
 		btnPremio.setFont(new Font("Book Antiqua", Font.BOLD, 17));
 
+		btnStock = new JButton("Stock");
+		btnStock.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				StockFinal stockFinal = new StockFinal();
+				stockFinal.frmStock.setVisible(true);
+			}
+		});
+		btnStock.setForeground(Color.BLUE);
+		btnStock.setFont(new Font("Book Antiqua", Font.BOLD, 13));
+
 		GroupLayout groupLayout = new GroupLayout(frmLector.getContentPane());
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-				.addGroup(groupLayout.createSequentialGroup().addGap(29).addComponent(btnLeerTarjeta).addGap(85)
+				.addGroup(groupLayout.createSequentialGroup().addGap(29).addComponent(btnLeerTarjeta).addGap(33)
 						.addComponent(btnReinciar, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE)
-						.addPreferredGap(ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+						.addGap(18).addComponent(btnStock, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE)
+						.addPreferredGap(ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
 						.addComponent(btnRegresar, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE)
 						.addGap(29))
 				.addGroup(groupLayout.createSequentialGroup().addGap(48)
@@ -218,22 +227,28 @@ public class Lector {
 				.addGroup(groupLayout.createSequentialGroup().addContainerGap(172, Short.MAX_VALUE)
 						.addComponent(lblTotalDePuntos, GroupLayout.PREFERRED_SIZE, 306, GroupLayout.PREFERRED_SIZE)
 						.addGap(83)));
-		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING).addGroup(groupLayout
-				.createSequentialGroup().addContainerGap()
-				.addComponent(lblTotalDePuntos, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE).addGap(11)
-				.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnPremio, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(txtPuntos, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))
-				.addGap(26)
-				.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
-						.addComponent(txtPuntosObtenidos, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtPremio, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE))
-				.addPreferredGap(ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-				.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnRegresar, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
-						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE).addComponent(btnLeerTarjeta)
-								.addComponent(btnReinciar, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)))
-				.addContainerGap()));
+		groupLayout.setVerticalGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup().addContainerGap()
+						.addComponent(lblTotalDePuntos, GroupLayout.PREFERRED_SIZE, 33, GroupLayout.PREFERRED_SIZE)
+						.addGap(11)
+						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(btnPremio, GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+								.addComponent(txtPuntos, GroupLayout.PREFERRED_SIZE, 35, GroupLayout.PREFERRED_SIZE))
+						.addGap(26)
+						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+								.addComponent(txtPuntosObtenidos, GroupLayout.PREFERRED_SIZE, 126,
+										GroupLayout.PREFERRED_SIZE)
+								.addComponent(txtPremio, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE))
+						.addPreferredGap(ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnRegresar, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+								.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+										.addComponent(btnLeerTarjeta)
+										.addComponent(btnReinciar, GroupLayout.PREFERRED_SIZE, 25,
+												GroupLayout.PREFERRED_SIZE)
+										.addComponent(btnStock, GroupLayout.PREFERRED_SIZE, 25,
+												GroupLayout.PREFERRED_SIZE)))
+						.addContainerGap()));
 		frmLector.getContentPane().setLayout(groupLayout);
 	}
 

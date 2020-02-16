@@ -47,4 +47,14 @@ public class ProductoController {
 		}
 	}
 
+	public static int getIdProductoByNombre(String nombre) {
+		int idProducto = 0;
+		try {
+			ProductoService.getIdProductoByNombre(nombre.trim());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return idProducto;
+	}
 }

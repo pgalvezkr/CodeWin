@@ -39,11 +39,11 @@ public class ProductoService {
 	}
 
 	// ACTUALIZAR TARJETA
-	public static ResultSet actualizar(int id, String nombre, double precio)
-			throws Exception {
+	public static ResultSet actualizar(int id, String nombre, double precio) throws Exception {
 		ResultSet resultSet = null;
 		// SENTENCIA SQL
-		String sentenceSql = "UPDATE PRODUCTO SET Nombre = '"+nombre+"', Precio= "+precio +" WHERE IdProducto ="+ id;
+		String sentenceSql = "UPDATE PRODUCTO SET Nombre = '" + nombre + "', Precio= " + precio + " WHERE IdProducto ="
+				+ id;
 		try {
 			// Creo la conexion
 			Connection conexion;
@@ -90,6 +90,30 @@ public class ProductoService {
 		return resultSet;
 	}
 
+	public static int getIdProductoByNombre(String nombre) throws Exception {
+		int idProducto = 0;
+		ResultSet resultSet = null;
+		// SENTENCIA SQL
+		String sentenceSql = "SELECT idProducto FROM Producto WHERE nombre ='" + nombre.trim() + "'";
+		try {
+			// Creo la conexion
+			Connection conexion;
+			conexion = ConexionBdd.getConexion();
+			// Ejecuto la sentencia SQL
+			Statement sentenciaInsert = conexion.createStatement();
+			resultSet = sentenciaInsert.executeQuery(sentenceSql);
+			// Obtengo resultados
+			while (resultSet.next()) {
+				idProducto = resultSet.getInt("idProducto");
+			}
+		} catch (Exception e) {
+			System.out.println("Ocurrió un error al momento de obtener la tarjeta");
+			throw new Exception(e.getMessage());
+		}
+
+		return idProducto;
+	}
+
 	// GET TARJETA
 	public static List<Producto> listar() throws Exception {
 		List<Producto> productos = new ArrayList<Producto>();
@@ -109,7 +133,7 @@ public class ProductoService {
 				producto.setIdProducto(resultSet.getInt("IdProducto"));
 				producto.setNombre(resultSet.getString("Nombre"));
 				producto.setPrecio(resultSet.getDouble("Precio"));
-				productos.add(producto);				
+				productos.add(producto);
 			}
 		} catch (Exception e) {
 			System.out.println("Ocurrió un error al momento de obtener la tarjeta");

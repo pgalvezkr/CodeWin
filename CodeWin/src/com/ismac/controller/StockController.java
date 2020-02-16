@@ -18,4 +18,15 @@ public class StockController {
 		}
 
 	}
+
+	public static int getCantidadActual(int idProducto) {
+		int cantidadActual = 0;
+		try {
+			cantidadActual = StockService.obtenerCantidadActual(idProducto);
+		} catch (Exception e) {
+			System.out.println("Ocurrio un error al momento de consultar la cantidad actual del producto");
+			e.printStackTrace();
+		}
+		return cantidadActual;
+	}
 }
