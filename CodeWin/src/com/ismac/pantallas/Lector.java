@@ -199,6 +199,7 @@ public class Lector {
 		btnStock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				StockFinal stockFinal = new StockFinal();
+				stockFinal.nombreProducto = txtPremio.getText();
 				stockFinal.frmStock.setVisible(true);
 			}
 		});
