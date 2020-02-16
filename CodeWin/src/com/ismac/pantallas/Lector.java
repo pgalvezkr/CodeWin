@@ -15,6 +15,7 @@ import javax.swing.JLabel;
 import java.awt.GridLayout;
 import com.jgoodies.forms.layout.FormLayout;
 import com.ismac.controller.LectorController;
+import com.ismac.controller.ProductoController;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
@@ -50,10 +51,10 @@ public class Lector {
 	private JTextField txtPuntos;
 	private JLabel lblTotalDePuntos;
 	private JTextField txtPuntosObtenidos;
-	private JTextField txtPremio;
+	private JTextField txtPremio1;
 	private JButton btnPremio;
 	private JButton btnStock;
-
+	
 	/**
 	 * Launch the application.
 	 */
@@ -143,13 +144,13 @@ public class Lector {
 		txtPuntosObtenidos.setEditable(false);
 		txtPuntosObtenidos.setColumns(10);
 
-		txtPremio = new JTextField();
-		txtPremio.setForeground(Color.BLACK);
-		txtPremio.setFont(new Font("Segoe UI Black", Font.BOLD, 14));
-		txtPremio.setHorizontalAlignment(SwingConstants.CENTER);
-		txtPremio.setText("APLAUSOS");
-		txtPremio.setEditable(false);
-		txtPremio.setColumns(10);
+		txtPremio1 = new JTextField();
+		txtPremio1.setForeground(Color.BLACK);
+		txtPremio1.setFont(new Font("Segoe UI Black", Font.BOLD, 14));
+		txtPremio1.setHorizontalAlignment(SwingConstants.CENTER);
+		txtPremio1.setText("APLAUSOS");
+		txtPremio1.setEditable(false);
+		txtPremio1.setColumns(10);
 
 		JButton btnReinciar = new JButton("Reiniciar");
 		btnReinciar.addMouseListener(new MouseAdapter() {
@@ -160,6 +161,7 @@ public class Lector {
 				txtPuntosObtenidos.setText("0");
 				totalPuntos = 0;
 				numeroTarjetas = 0;
+				txtPremio1.setText("Aplausos");
 			}
 
 		});
@@ -189,18 +191,28 @@ public class Lector {
 			public void actionPerformed(ActionEvent arg0) {
 				LectorController premio = new LectorController();
 				// 1. AQUI ACTUALIZAR EL LABEL CON EL NOMBRE DEL PREMIO
-				txtPremio.setText(premio.obtenerPremio(Integer.parseInt(txtPuntosObtenidos.getText())));
+				txtPremio1.setText(premio.obtenerPremio(Integer.parseInt(txtPuntosObtenidos.getText())));
 			}
 		});
 		btnPremio.setBackground(new Color(255, 245, 238));
 		btnPremio.setFont(new Font("Book Antiqua", Font.BOLD, 17));
 
 		btnStock = new JButton("Stock");
+		btnStock.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String nombrejk = txtPremio1.getText(); 
+				StockFinal stockFinal = new StockFinal();
+				stockFinal.setNombreProducto(nombrejk);
+				System.out.println("Test");
+				//String nombreProducto = txtPremio.getText();
+				//int idProducto = ProductoController.getIdProductoByNombre(nombreProducto);
+				stockFinal.frmStock.setVisible(true);
+			}
+		});
 		btnStock.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				StockFinal stockFinal = new StockFinal();
-				stockFinal.nombreProducto = txtPremio.getText();
-				stockFinal.frmStock.setVisible(true);
+				
 			}
 		});
 		btnStock.setForeground(Color.BLUE);
@@ -223,7 +235,7 @@ public class Lector {
 						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING, false)
 								.addComponent(btnPremio, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
 										Short.MAX_VALUE)
-								.addComponent(txtPremio, GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
+								.addComponent(txtPremio1, GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
 						.addGap(71))
 				.addGroup(groupLayout.createSequentialGroup().addContainerGap(172, Short.MAX_VALUE)
 						.addComponent(lblTotalDePuntos, GroupLayout.PREFERRED_SIZE, 306, GroupLayout.PREFERRED_SIZE)
@@ -239,7 +251,7 @@ public class Lector {
 						.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
 								.addComponent(txtPuntosObtenidos, GroupLayout.PREFERRED_SIZE, 126,
 										GroupLayout.PREFERRED_SIZE)
-								.addComponent(txtPremio, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE))
+								.addComponent(txtPremio1, GroupLayout.PREFERRED_SIZE, 126, GroupLayout.PREFERRED_SIZE))
 						.addPreferredGap(ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
 						.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(btnRegresar, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)

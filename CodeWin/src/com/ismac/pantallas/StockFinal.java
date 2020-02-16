@@ -11,10 +11,15 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 
 import com.ismac.controller.ProductoController;
 import com.ismac.controller.StockController;
+import com.ismac.servicios.StockService;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class StockFinal {
 
@@ -25,7 +30,18 @@ public class StockFinal {
 	private JLabel lblCantidadEntregada;
 	private JButton btnGrabar;
 	private JButton btnCancelar;
-	public String nombreProducto;
+	private String nombreProducto;
+	public int idprod;
+	
+	
+	
+	public String getNombreProducto() {
+		return nombreProducto;
+	}
+
+	public void setNombreProducto(String nombreProducto) {
+		this.nombreProducto = nombreProducto;
+	}
 
 	/**
 	 * Launch the application.
@@ -44,10 +60,16 @@ public class StockFinal {
 	}
 
 	/**
-	 * Create the application.
+	 * Create the applicaaddFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+			}
+		});
+		frmStock.tion.
 	 */
 	public StockFinal() {
 		initialize();
+		
 	}
 
 	/**
@@ -55,6 +77,20 @@ public class StockFinal {
 	 */
 	private void initialize() {
 		frmStock = new JFrame();
+		frmStock.getContentPane().addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				txtProducto.setText(nombreProducto);
+			}
+		});
+		frmStock.getContentPane().addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusGained(FocusEvent e) {
+				txtProducto.setText(nombreProducto);
+			}
+		});
+		
+		
 		frmStock.setTitle("Stock");
 		frmStock.setBounds(100, 100, 450, 300);
 		frmStock.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,21 +113,29 @@ public class StockFinal {
 		txtCantidadEntregada.setColumns(10);
 
 		lblCantidadEntregada = new JLabel("Cantidad Entregada");
-		//Aquí consultar la cantidad actual del producto y poner ese valor en el texto de cantidad actual
+		//Aquï¿½ consultar la cantidad actual del producto y poner ese valor en el texto de cantidad actual
+		// Aquï¿½ poner el nombre del producto en el texto del producto
 		
-		// Aquí poner el nombre del producto en el texto del producto
-
-		// Aquí consultar el id del producto por el nombre invocando al metodo
-		int idProducto = ProductoController.getIdProductoByNombre(nombreProducto);
-		int cantidad = Integer.getInteger(txtCantidadEntregada.getText());
+	
+		// Aquï¿½ consultar el id del producto por el nombre invocando al metodo
+		//int idProducto = ProductoController.getIdProductoByNombre(nombreProducto);
+		//int cantidad = Integer.getInteger(txtCantidadEntregada.getText());
 		btnGrabar = new JButton("Grabar");
 		btnGrabar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int cantidad = Integer.parseInt(txtCantidadEntregada.getText());
+				int idProducto = ProductoController.getIdProductoByNombre(nombreProducto);
+				
 				StockController.descontarProductos(idProducto, cantidad);
 			}
 		});
 
 		btnCancelar = new JButton("Cancelar");
+		btnCancelar.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
 		GroupLayout groupLayout = new GroupLayout(frmStock.getContentPane());
 		groupLayout.setHorizontalGroup(groupLayout.createParallelGroup(Alignment.TRAILING).addGroup(groupLayout
 				.createSequentialGroup().addGap(40)

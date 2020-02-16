@@ -12,7 +12,7 @@ public class ProductoController {
 		try {
 			ProductoService.crear(producto.getNombre(), producto.getPrecio());
 		} catch (Exception e) {
-			System.out.println("Ocurrió un error al guardar las producto " + e.getMessage());
+			System.out.println("Ocurriï¿½ un error al guardar las producto " + e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -22,7 +22,7 @@ public class ProductoController {
 		try {
 			productos = ProductoService.listar();
 		} catch (Exception e) {
-			System.out.println("Ocurrió un error al consultar las productos " + e.getMessage());
+			System.out.println("Ocurriï¿½ un error al consultar las productos " + e.getMessage());
 			e.printStackTrace();
 		}
 		return productos;
@@ -32,7 +32,7 @@ public class ProductoController {
 		try {
 			ProductoService.actualizar(id, producto.getNombre(), producto.getPrecio());
 		} catch (Exception e) {
-			System.out.println("Ocurrió un error al actualizar el producto " + e.getMessage());
+			System.out.println("Ocurriï¿½ un error al actualizar el producto " + e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -42,15 +42,16 @@ public class ProductoController {
 		try {
 			ProductoService.eliminar(id);
 		} catch (Exception e) {
-			System.out.println("Ocurrió un error al eliminar el producto " + e.getMessage());
+			System.out.println("Ocurriï¿½ un error al eliminar el producto " + e.getMessage());
 			e.printStackTrace();
 		}
 	}
 
 	public static int getIdProductoByNombre(String nombre) {
+					 
 		int idProducto = 0;
 		try {
-			ProductoService.getIdProductoByNombre(nombre.trim());
+			idProducto = ProductoService.getIdProductoByNombre(nombre.trim());
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

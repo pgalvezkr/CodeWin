@@ -9,7 +9,7 @@ public class StockController {
 		try {
 			cantidadActual = StockService.obtenerCantidadActual(idProducto);
 			if (cantidadActual >= cantidad) {
-				StockService.disminuirStock(idProducto, cantidadActual);
+				StockService.disminuirStock(idProducto, cantidad);
 			} else {
 				System.out.println("No existe disponibilidad del producto");
 			}
