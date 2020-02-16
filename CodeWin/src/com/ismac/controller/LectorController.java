@@ -71,20 +71,7 @@ public class LectorController {
 		return nombreProducto;
 	}
 	public static void resetTarjetas() {
-		Lector lect = new Lector();
-		JOptionPane.showMessageDialog(null, "Ingrese Nuevamente las Tarjetas"
-				+ "", "Adventencia", JOptionPane.INFORMATION_MESSAGE);
-		//JTextField valor = null;
-		//valor.setText("0");
-		System.out.println("Borrado");
-		lect.setTxtPuntosObtenidosjk();
 		
-		//txtPuntosObtenidos.setText("0");
-		lect.setTotalPuntos(0);
-		//totalPuntos=0;
-		lect.setNumeroTarjetas(0);
-		System.out.println("Borrado1111111111");
-		//numeroTarjetas=0;
 		
 	}
 	

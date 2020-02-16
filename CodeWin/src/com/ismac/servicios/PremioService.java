@@ -10,10 +10,10 @@ public class PremioService {
 
 	/**
 	 * Permite obtener el nombre del premio que le corresponde al puntaje que recibe
-	 * como parámetro.
+	 * como parï¿½metro.
 	 * 
 	 * @param puntaje,
-	 *            número de puntos con el que se va a consultar en que rango de
+	 *            nï¿½mero de puntos con el que se va a consultar en que rango de
 	 *            puntos se encuentra y que premio le corresponde @return, nombre
 	 *            del producto que se gana como premio
 	 * @throws Exception
@@ -36,14 +36,14 @@ public class PremioService {
 			// Obtengo resultados
 			while (resultSet.next()) {
 				idProducto = resultSet.getInt("idProducto");
-				String setenceProducto = "Select nombre FROM Producto where id =" + idProducto;
+				String setenceProducto = "Select nombre FROM Producto where 'idProducto' =" + idProducto;
 				resultSetProducto = sentenciaInsert.executeQuery(setenceProducto);
 			}
 			while (resultSetProducto.next()) {
 				nombrePremio = resultSet.getString("nombre");
 			}
 		} catch (Exception e) {
-			System.out.println("Ocurrió un error al momento de obtener la tarjeta");
+			System.out.println("Ocurriï¿½ un error al momento de obtener la tarjeta");
 			throw new Exception(e.getMessage());
 		}
 		return nombrePremio;
@@ -69,7 +69,7 @@ public class PremioService {
 				System.out.println("Generado: " + resultSet.getString(1));
 			}
 		} catch (Exception e) {
-			System.out.println("Ocurrió un error al momento de guardar la tarjeta");
+			System.out.println("Ocurriï¿½ un error al momento de guardar la tarjeta");
 			throw new Exception(e.getMessage());
 		}
 

@@ -53,43 +53,7 @@ public class Lector {
 	private JTextField txtPremio;
 	private JButton btnPremio;
 	
-	
-	
-	public int getNumeroTarjetas() {
-		return numeroTarjetas;
-	}
 
-	public void setNumeroTarjetas(int numeroTarjetas) {
-		this.numeroTarjetas = numeroTarjetas;
-	}
-
-	public int getTotalPuntos() {
-		return totalPuntos;
-	}
-
-	public void setTotalPuntos(int totalPuntos) {
-		this.totalPuntos = totalPuntos;
-	}
-
-	public JTextField getTxtPuntos() {
-		return txtPuntos;
-	}
-
-	public void setTxtPuntos(JTextField txtPuntos) {
-		this.txtPuntos = txtPuntos;
-	}
-
-	public JTextField getTxtPuntosObtenidos() {
-		return txtPuntosObtenidos;
-	}
-
-	public void setTxtPuntosObtenidos(JTextField txtPuntosObtenidos) {
-		this.txtPuntosObtenidos = txtPuntosObtenidos;
-	}
-	
-	public void setTxtPuntosObtenidosjk() {
-		txtPuntosObtenidos.setText("0");
-	}
 
 	/**
 	 * Launch the application.
@@ -189,13 +153,11 @@ public class Lector {
 		btnReinciar.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				LectorController reset = new LectorController();
-				reset.resetTarjetas();
-//				JOptionPane.showMessageDialog(null, "Ingrese Nuevamente las Tarjetas"
-//						+ "", "Adventencia", JOptionPane.INFORMATION_MESSAGE);
-//				txtPuntosObtenidos.setText("0");
-//				totalPuntos=0;
-//				numeroTarjetas=0;
+				JOptionPane.showMessageDialog(null, "Ingrese Nuevamente las Tarjetas"
+						+ "", "Adventencia", JOptionPane.INFORMATION_MESSAGE);
+				txtPuntosObtenidos.setText("0");
+				totalPuntos=0;
+				numeroTarjetas=0;
 			}
 			
 		});
@@ -214,10 +176,19 @@ public class Lector {
 		btnRegresar.setFont(new Font("Book Antiqua", Font.BOLD, 13));
 
 		btnPremio = new JButton("Ver Premio");
+		btnPremio.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+			
+		});
 		btnPremio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				LectorController premio = new LectorController();
+				premio.obtenerPremio(Integer.parseInt(txtPuntosObtenidos.getText()));
 				// 1. AQUI ACTUALIZAR EL LABEL CON EL NOMBRE DEL PREMIO
-
+				
 				// 2. INVOCO AL FRAME DEL STOCK PARA DISMINUIRLO
 				StockFinal stock = new StockFinal();
 				stock.frmStock.setVisible(true);
