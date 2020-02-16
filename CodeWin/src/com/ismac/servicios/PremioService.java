@@ -20,12 +20,10 @@ public class PremioService {
 	 */
 	public static String obtenerPremio(int puntaje) throws Exception {
 		String nombrePremio = "Golosinas";
-		int idProducto = 0;
 		ResultSet resultSet = null;
-		ResultSet resultSetProducto = null;
 		// SENTENCIA SQL
-		String sentenceSql = "SELECT idProducto FROM Premio where  " + puntaje + ">= rangoInicial and " + puntaje
-				+ "<= rangoFinal";
+		String sentenceSql = "SELECT prod.nombre AS nombre FROM Premio pr JOIN Producto prod on pr.idProducto = prod.idProducto "
+				+ " where  " + puntaje + ">= pr.rangoInicial and " + puntaje + "<= pr.rangoFinal";
 		try {
 			// Creo la conexion
 			Connection conexion;
@@ -35,11 +33,6 @@ public class PremioService {
 			resultSet = sentenciaInsert.executeQuery(sentenceSql);
 			// Obtengo resultados
 			while (resultSet.next()) {
-				idProducto = resultSet.getInt("idProducto");
-				String setenceProducto = "Select nombre FROM Producto where 'idProducto' =" + idProducto;
-				resultSetProducto = sentenciaInsert.executeQuery(setenceProducto);
-			}
-			while (resultSetProducto.next()) {
 				nombrePremio = resultSet.getString("nombre");
 			}
 		} catch (Exception e) {
