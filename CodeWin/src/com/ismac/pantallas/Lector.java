@@ -186,9 +186,9 @@ public class Lector {
 		btnPremio.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				LectorController premio = new LectorController();
-				premio.obtenerPremio(Integer.parseInt(txtPuntosObtenidos.getText()));
-				// 1. AQUI ACTUALIZAR EL LABEL CON EL NOMBRE DEL PREMIO
 				
+				// 1. AQUI ACTUALIZAR EL LABEL CON EL NOMBRE DEL PREMIO
+				txtPremio.setText(premio.obtenerPremio(Integer.parseInt(txtPuntosObtenidos.getText())));
 				// 2. INVOCO AL FRAME DEL STOCK PARA DISMINUIRLO
 				StockFinal stock = new StockFinal();
 				stock.frmStock.setVisible(true);
